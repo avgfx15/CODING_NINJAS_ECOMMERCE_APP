@@ -5,9 +5,19 @@ import dotenv from "dotenv";
 // ~ 2. Create an express app
 const app = express();
 
+// Import the connectDB function from the dbConnect.js file
 import connectDB from "./config/dbConnect.js";
 connectDB();
+
+// Import the authRouter from the authRoutes.js file
+import authRouter from "./routes/authRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import userRouter from "./routes/userRoutes.js";
+
 // ~ 3. Define a route for the root URL
+app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
+app.use("/api/products", productRoutes);
 
 // Middleware
 app.use(express.json());
