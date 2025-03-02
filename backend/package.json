@@ -1,0 +1,21 @@
+{
+  "name": "coding_ninjas_ecommerce_app",
+  "version": "1.0.0",
+  "description": "Ecommerce App with coding ninjas",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "E-commerce",
+    "App"
+  ],
+  "author": "Stacodev",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
