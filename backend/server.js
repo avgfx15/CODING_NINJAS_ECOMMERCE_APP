@@ -22,6 +22,9 @@ import userRouter from "./routes/userRoutes.js";
 // | import chalk Log Styling
 import { errorLog, successLog } from "./utils/consoleLog.js";
 
+// | import error Handler Constructor
+import { ErrorHandler } from "./middlewares/errorHandler.js";
+
 // ` Middleware configure
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,6 +35,9 @@ dotenv.config();
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+
+// ` Configure error handler globally
+app.use(ErrorHandler);
 
 // @ Start the server on port 3000
 const port = process.env.PORT || 3000;
