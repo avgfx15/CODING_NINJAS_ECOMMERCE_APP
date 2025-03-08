@@ -1,8 +1,14 @@
+// | import express
 import express from "express";
+
+// | import productControllers
 import { productTestController } from "../controllers/procuctControllers.js";
 
-const productRoutes = express.Router();
+// @ Define productRouter
+const productRouter = express.Router();
 
-productRoutes.get("/test", productTestController);
+// ` Configure productRoute
+productRouter.get("/test", productTestController);
 
-export default productRoutes;
+// ~ Export productRouter
+export default productRouter;
