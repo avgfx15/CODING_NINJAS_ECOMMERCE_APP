@@ -14,6 +14,9 @@ const app = express();
 import connectDB from "./config/dbConnect.js";
 connectDB();
 
+// | import cooklie-parser
+import cookieParser from "cookie-parser";
+
 // | Import the authRouter from the authRoutes.js file
 import authRouter from "./routes/authRoutes.js";
 import productRouter from "./routes/productRoutes.js";
@@ -29,6 +32,7 @@ import { errorHandlerMiddleware } from "./middlewares/errorHandler.js";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(cookieParser());
 dotenv.config();
 
 // ` Configure route for the root URL
