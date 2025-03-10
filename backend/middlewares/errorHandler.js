@@ -7,8 +7,8 @@ export class ErrorHandler extends Error {
 }
 
 export const errorHandlerMiddleware = async (err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const message = err.message || "Internal Server Error!!!";
+  let statusCode = err.statusCode || 500;
+  let message = err.message || "Internal Server Error!!!";
 
   // Handle MongoDB CastError (Invalid ID format)
   if (err.name === "CastError") {

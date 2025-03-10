@@ -10,5 +10,8 @@ const productRouter = express.Router();
 // ` Configure productRoute
 productRouter.get("/test", productTestController);
 
+// + Add Product
+productRouter.post("/addproduct");
+
 // ~ Export productRouter
 export default productRouter;

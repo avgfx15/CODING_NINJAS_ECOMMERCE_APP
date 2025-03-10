@@ -36,9 +36,9 @@ app.use(cookieParser());
 dotenv.config();
 
 // ` Configure route for the root URL
-app.use("/api/auth", authRouter);
-app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/products", productRouter);
 
 // ` Configure error handler globally
 app.use(errorHandlerMiddleware);

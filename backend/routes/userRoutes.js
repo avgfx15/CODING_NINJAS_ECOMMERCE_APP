@@ -2,7 +2,11 @@
 import express from "express";
 
 // | import userControllers
-import { userTestController } from "../controllers/userControllers.js";
+import {
+  addUserProfileController,
+  userTestController,
+} from "../controllers/userControllers.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 //@ define userRouter
 const userRouter = express.Router();
@@ -10,7 +14,8 @@ const userRouter = express.Router();
 // ` Configure routes
 userRouter.get("/test", userTestController);
 
-userRouter.post("/signup");
+// + Add userProfile
+userRouter.post("/addprofile", authMiddleware, addUserProfileController);
 
 // ~ export userRouter
 export default userRouter;

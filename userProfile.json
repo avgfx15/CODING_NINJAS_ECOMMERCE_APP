@@ -1,0 +1,14 @@
+{
+    "name": "Dhvani Gandhi",
+    "mobile": "9998233099",
+    "age": 18,
+    "gender": "Female",
+    "address": {
+        "street": "22, Yogeshwar park, Opp Aquarium, Near Star Hyper, Adajan, Surat",
+        "city": "Surat",
+        "state": "Gujarat",
+        "zip": "91",
+        "country": "India"
+    },
+    "profileImage": "https://example.com/johndoe-profile.jpg"
+}

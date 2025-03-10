@@ -13,9 +13,11 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     role: {
       type: String,
+      enum: ["Customer", "Seller", "Admin"],
       default: "Customer",
     },
   },
@@ -23,7 +25,7 @@ const userSchema = new mongoose.Schema(
 );
 
 // @ Define userModel
-const userModel = mongoose.model("User", userSchema);
+const UserModel = mongoose.model("User", userSchema);
 
 // ~ Export the model
-export default userModel;
+export default UserModel;

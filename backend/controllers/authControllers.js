@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 // | import chalk Log Styling
 import { ErrorHandler } from "../middlewares/errorHandler.js";
-import userModel from "../models/userSchema.js";
+import UserModel from "../models/userSchema.js";
 import { errorLog, infoLog } from "../utils/consoleLog.js";
 
 // / Auth Testing
@@ -30,7 +30,7 @@ export const authSignUpController = async (req, res, next) => {
       return next(new ErrorHandler(400, "Please provide email and password"));
     }
     // $ Check user is Exist or not
-    const userExist = await userModel.findOne({ email });
+    const userExist = await UserModel.findOne({ email });
 
     // $ if user Exist
     if (userExist) {
@@ -42,7 +42,7 @@ export const authSignUpController = async (req, res, next) => {
     const hashPassword = await bcrypt.hashSync(password, salt);
 
     // @ newUser with hashPassword
-    const newUser = new userModel({
+    const newUser = new UserModel({
       email,
       password: hashPassword,
     });
@@ -66,7 +66,8 @@ export const authSignInController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const userExist = await userModel.findOne({ email });
+    const userExist = await UserModel.findOne({ email }).select("+password");
+    console.log(userExist);
 
     if (!userExist) {
       return next(new ErrorHandler(401, "User not exists"));
