@@ -67,7 +67,21 @@ export const getUserProfileController = async (req, res, next) => {
   try {
     const loggedInUser = req.user;
 
-    const userExist = await UserModel.findById(loggedInUser.id);
+    const profileExist = await UserProfileModel.findOne({
+      userId: loggedInUser.id,
+    }).populate("userId");
+
+    // %  You are not authorized
+    if (!profileExist) {
+      return next(new ErrorHandler(401, "You are not authorized"));
+    }
+    return res
+      .status(200)
+      .json({
+        successStatus: true,
+        message: `${profileExist.name}'s profile data!!!`,
+        userProfile: profileExist,
+      });
   } catch (error) {
     return next(error);
   }

@@ -67,7 +67,6 @@ export const authSignInController = async (req, res, next) => {
     const { email, password } = req.body;
 
     const userExist = await UserModel.findOne({ email }).select("+password");
-    console.log(userExist);
 
     if (!userExist) {
       return next(new ErrorHandler(401, "User not exists"));
