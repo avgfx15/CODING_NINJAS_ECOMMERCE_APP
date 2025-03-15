@@ -4,10 +4,30 @@ const AuthComponent = () => {
   // & SignIn SignUp toggle
   const [isSignIn, setIsSignIn] = useState(true);
 
+  // & Form Data
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    cPassword: "",
+  });
+
   // & SignIn SignUp toggle function
   const toggleSignInSignUp = () => {
     setIsSignIn(!isSignIn);
   };
+
+  // & SignIn Form Submit
+  const signInFormSubmit = (e) => {
+    console.log("Sign In Form Submit");
+    e.preventDefault();
+    const { email, password } = formData;
+  };
+
+  // & SignUp Form Submit
+  const signUpFormSubmit = () => {
+    console.log("Sign Up Form Submit");
+  };
+
   return (
     <div className="flex justify-center items-center md:h-screen my-5 h-fit w-full">
       {isSignIn ? (
@@ -41,7 +61,12 @@ const AuthComponent = () => {
                 placeholder="Password"
               />
 
-              <button className="btn btn-neutral mt-4 text-xl">Sign In</button>
+              <button
+                className="btn btn-neutral mt-4 text-xl"
+                onClick={(e) => signInFormSubmit()}
+              >
+                Sign In
+              </button>
               <div className="flex items-center my-4">
                 <p className="text-lg mr-3">
                   If not registered, please register here
@@ -94,7 +119,12 @@ const AuthComponent = () => {
                 placeholder="Confirm Password"
               />
 
-              <button className="btn btn-neutral mt-4 text-xl">Sign Up</button>
+              <button
+                className="btn btn-neutral mt-4 text-xl"
+                onClick={(e) => signUpFormSubmit()}
+              >
+                Sign Up
+              </button>
               <div className="flex items-center my-4">
                 <p className="text-lg mr-3">
                   If already registered, please register here

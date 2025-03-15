@@ -9,10 +9,12 @@ import { ErrorHandler } from "../middlewares/errorHandler.js";
 import UserModel from "../models/userSchema.js";
 import { errorLog, infoLog } from "../utils/consoleLog.js";
 
+// | import sendWelcomeEmail
+import sendWelcomeEmail from "../config/mailer.js";
+
 // / Auth Testing
 export const authTestController = async (req, res, next) => {
   try {
-    console.log(req.user);
     res.status(200).json({ message: "Auth Route is working", success: true });
   } catch (error) {
     errorLog(error.message);
@@ -49,6 +51,9 @@ export const authSignUpController = async (req, res, next) => {
 
     // $ user saved in DB
     const savedUser = await newUser.save();
+
+    // $ Send a welcome email
+    sendWelcomeEmail(email);
 
     // $ Send response to client
     return res.status(201).json({
