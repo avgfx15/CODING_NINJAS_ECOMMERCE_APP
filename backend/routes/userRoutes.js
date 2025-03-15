@@ -4,6 +4,7 @@ import express from "express";
 // | import userControllers
 import {
   addUserProfileController,
+  getAllUsersUserProfileController,
   getUserProfileController,
   userTestController,
 } from "../controllers/userControllers.js";
@@ -20,6 +21,13 @@ userRouter.post("/addprofile", authMiddleware, addUserProfileController);
 
 // / Get User Profile
 userRouter.get("/getprofile", authMiddleware, getUserProfileController);
+
+// / Get All Users Profile
+userRouter.get(
+  "/getallusersprofile",
+  authMiddleware,
+  getAllUsersUserProfileController
+);
 
 // ~ export userRouter
 export default userRouter;

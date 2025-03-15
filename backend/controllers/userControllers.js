@@ -75,13 +75,36 @@ export const getUserProfileController = async (req, res, next) => {
     if (!profileExist) {
       return next(new ErrorHandler(401, "You are not authorized"));
     }
-    return res
-      .status(200)
-      .json({
-        successStatus: true,
-        message: `${profileExist.name}'s profile data!!!`,
-        userProfile: profileExist,
-      });
+    return res.status(200).json({
+      successStatus: true,
+      message: `${profileExist.name}'s profile data!!!`,
+      userProfile: profileExist,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+// / Get All Users Profile
+export const getAllUsersUserProfileController = async (req, res, next) => {
+  try {
+    const loggedInUser = req.user;
+
+    // % Check user is Admin or not
+    const userExist = await UserModel.findById(loggedInUser.id);
+
+    // % User is not Admin
+    if (userExist.role !== "Admin") {
+      return next(new ErrorHandler(401, "You are not authorized"));
+    }
+    // $ User is Admin
+    const allUsersProfile = await UserProfileModel.find().populate("userId");
+
+    return res.status(200).json({
+      successStatus: true,
+      message: "All users profile data!!!",
+      AllUsersProfile: allUsersProfile,
+    });
   } catch (error) {
     return next(error);
   }

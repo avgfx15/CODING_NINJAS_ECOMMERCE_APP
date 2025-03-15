@@ -1,14 +1,156 @@
-{
-    "name": "Dhvani Gandhi",
-    "mobile": "9998233099",
-    "age": 18,
-    "gender": "Female",
-    "address": {
-        "street": "22, Yogeshwar park, Opp Aquarium, Near Star Hyper, Adajan, Surat",
-        "city": "Surat",
-        "state": "Gujarat",
-        "zip": "91",
-        "country": "India"
+[
+    {
+        "name": "Dhvani Gandhi",
+        "mobile": "9998233099",
+        "age": 18,
+        "gender": "Female",
+        "address": {
+            "street": "22, Yogeshwar park, Opp Aquarium, Near Star Hyper, Adajan, Surat",
+            "city": "Surat",
+            "state": "Gujarat",
+            "zip": "91",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/johndoe-profile.jpg"
     },
-    "profileImage": "https://example.com/johndoe-profile.jpg"
-}
+    {
+        "name": "Chandresh Laining",
+        "mobile": "7016046462",
+        "age": 50,
+        "gender": "Male",
+        "address": {
+            "street": "Near Over Bridge, Bhalej Road, Beside Bagiwala, Anand",
+            "city": "Anand",
+            "state": "Gujarat",
+            "zip": "91",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/chandresh-profile.jpg"
+    },
+    {
+        "name": "Meera Sharma",
+        "mobile": "9823456789",
+        "age": 45,
+        "gender": "Female",
+        "address": {
+            "street": "Sector 17, Near Huda Market",
+            "city": "Gurgaon",
+            "state": "Haryana",
+            "zip": "122001",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/meera-profile.jpg"
+    },
+    {
+        "name": "Rahul Verma",
+        "mobile": "9988776655",
+        "age": 35,
+        "gender": "Male",
+        "address": {
+            "street": "MG Road, Near Metro Station",
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "zip": "560001",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/rahul-profile.jpg"
+    },
+    {
+        "name": "Aditi Patel",
+        "mobile": "9123456780",
+        "age": 28,
+        "gender": "Female",
+        "address": {
+            "street": "CG Road, Near Law Garden",
+            "city": "Ahmedabad",
+            "state": "Gujarat",
+            "zip": "380009",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/aditi-profile.jpg"
+    },
+    {
+        "name": "Vikas Reddy",
+        "mobile": "8899001122",
+        "age": 40,
+        "gender": "Male",
+        "address": {
+            "street": "Banjara Hills, Road No. 10",
+            "city": "Hyderabad",
+            "state": "Telangana",
+            "zip": "500034",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/vikas-profile.jpg"
+    },
+    {
+        "name": "Neha Kapoor",
+        "mobile": "7654321890",
+        "age": 32,
+        "gender": "Female",
+        "address": {
+            "street": "DLF Phase 2, Near Cyber City",
+            "city": "Gurgaon",
+            "state": "Haryana",
+            "zip": "122002",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/neha-profile.jpg"
+    },
+    {
+        "name": "Amit Joshi",
+        "mobile": "9876543210",
+        "age": 42,
+        "gender": "Male",
+        "address": {
+            "street": "FC Road, Near Deccan Gymkhana",
+            "city": "Pune",
+            "state": "Maharashtra",
+            "zip": "411004",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/amit-profile.jpg"
+    },
+    {
+        "name": "Kavita Singh",
+        "mobile": "8765432109",
+        "age": 30,
+        "gender": "Female",
+        "address": {
+            "street": "Sector 18, Near Noida City Centre",
+            "city": "Noida",
+            "state": "Uttar Pradesh",
+            "zip": "201301",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/kavita-profile.jpg"
+    },
+    {
+        "name": "Rajesh Kumar",
+        "mobile": "7554321890",
+        "age": 35,
+        "gender": "Male",
+        "address": {
+            "street": "Sector 17, Near Huda Market",
+            "city": "Gurgaon",
+            "state": "Haryana",
+            "zip": "122001",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/rajesh-profile.jpg"
+    },
+    {
+        "name": "Sneha Sharma",
+        "mobile": "9776543210",
+        "age": 28,
+        "gender": "Female",
+        "address": {
+            "street": "Sector 18, Near Noida City Centre",
+            "city": "Noida",
+            "state": "Uttar Pradesh",
+            "zip": "201301",
+            "country": "India"
+        },
+        "profileImage": "https://example.com/sneha-profile.jpg"
+    }
+]
