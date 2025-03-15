@@ -32,7 +32,7 @@ const ThemeComponent = () => {
       </div>
       <ul
         tabIndex={0}
-        className="dropdown-content z-[1] menu p-2 shadow  rounded-box w-52"
+        className="dropdown-content z-[1] menu p-2 mt-5 shadow  rounded-box w-52"
       >
         {themes.map((theme) => (
           <li key={theme}>

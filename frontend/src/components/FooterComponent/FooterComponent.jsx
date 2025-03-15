@@ -2,7 +2,7 @@ import React from "react";
 
 const FooterComponent = () => {
   return (
-    <footer className="bg-gray-800 flex flex-row justify-around items-center text-white p-5">
+    <footer className="w-full container2 flex flex-row justify-around items-center text-white p-5">
       <nav className="flex flex-col">
         <h6 className="footer-title">Services</h6>
         <a className="link link-hover">Branding</a>

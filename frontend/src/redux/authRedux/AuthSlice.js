@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginUserAction } from "./AuthActions";
 
 const initialState = {
   users: null,
   loggedInUser: null,
   userMessage: null,
   userLoading: false,
-  userSuccessStatus: flase,
+  userSuccessStatus: false,
 };
 
 const AuthSlice = createSlice({

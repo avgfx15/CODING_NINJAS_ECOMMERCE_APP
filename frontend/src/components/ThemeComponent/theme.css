@@ -3,7 +3,7 @@
   --bg-primary: #ffffff;
   --bg-secondary: #f3f4f6;
   --text-primary: #1f2937;
-  --text-secondary: #4b5563;
+  --text-secondary: #3a3a3a;
 }
 
 /* Dark Theme */
@@ -27,15 +27,15 @@
   --bg-primary: #faebd7;
   --bg-secondary: #7a573e;
   --text-primary: #2f4f4f;
-  --text-secondary: #ffffff;
+  --text-secondary: #c4c4c4;
 }
 
 /* Aqua Theme */
 .theme-aqua {
   --bg-primary: #007acc;
-  --bg-secondary: #003f5c;
+  --bg-secondary: #0974a5;
   --text-primary: #ffffff;
-  --text-secondary: #ffcc00;
+  --text-secondary: #0e0e0e;
 }
 
 /* Apply Theme Variables */
@@ -45,9 +45,13 @@ body {
 }
 
 
-.container {
+.container2 {
   background-color: var(--bg-secondary);
   color: var(--text-secondary);
+  label, legend {
+    color: var(--text-secondary);
+  }
   padding: 1rem;
   border-radius: 8px;
 }
+

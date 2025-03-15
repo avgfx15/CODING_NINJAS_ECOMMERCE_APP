@@ -8,6 +8,7 @@ import HomeComponent from "./components/HomeComponent/HomeComponent";
 import { selectTheme } from "./redux/themeSlice";
 import { useSelector } from "react-redux";
 import FooterComponent from "./components/FooterComponent/FooterComponent";
+import AuthComponent from "./components/AuthComponent/AuthComponent";
 
 const App = () => {
   const theme = useSelector(selectTheme);
@@ -20,6 +21,7 @@ const App = () => {
       <NavbarComponent />{" "}
       <Routes>
         <Route path="/" element={<HomeComponent />} />
+        <Route path="/login" element={<AuthComponent />} />
         <Route path="/about" element={<h1>About</h1>} />
       </Routes>
       <FooterComponent />
