@@ -42,12 +42,14 @@
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
 }
 
 
 .container2 {
   background-color: var(--bg-secondary);
-  color: var(--text-secondary);
+  color: var(--text-secondary);  
   label, legend {
     color: var(--text-secondary);
   }

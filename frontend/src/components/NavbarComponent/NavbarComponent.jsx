@@ -1,14 +1,27 @@
 import React from "react";
 import ThemeComponent from "../ThemeComponent/ThemeComponent";
 import { useSelector } from "react-redux";
-import { selectLoggedInUser } from "../../redux/authRedux/AuthSlice";
-import { Link } from "react-router";
+import {
+  isUserLoggedInState,
+  loggedInUserState,
+  userLoadingState,
+} from "../../redux/authRedux/AuthSlice";
+import { Link, NavLink } from "react-router";
+import LoadingComponent from "../LoadingComponent/LoadingComponent";
 
 const NavbarComponent = () => {
-  // const loggedInUser = useSelector(selectLoggedInUser);
-  const loggedInUser = false;
+  const loggedInUser = useSelector(loggedInUserState);
+
+  const isUserLoggedIn = useSelector(isUserLoggedInState);
+
+  const userLoading = useSelector(userLoadingState);
+
+  if (userLoading) {
+    return <LoadingComponent />;
+  }
+
   return (
-    <div className="navbar  shadow-sm mx-auto">
+    <div className="navbar  shadow-sm mx-auto border-b- border-purple-100">
       <div className="navbar-start">
         {/* responsive Dropdown menu start  */}
         <div className="dropdown">
@@ -55,7 +68,7 @@ const NavbarComponent = () => {
         {/* responsive Dropdown menu End  */}
         {/* Main Menu Start  */}
         {/* Main Head Name Start */}
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">OmniShop</a>
         {/* Main Head Name End */}
       </div>
 
@@ -63,9 +76,11 @@ const NavbarComponent = () => {
 
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Item 1</a>
-          </li>
+          <NavLink to="/" className="hover:text-lg">
+            <li>
+              <a>Home</a>
+            </li>
+          </NavLink>
           <li>
             <details>
               <summary>Parent</summary>
@@ -131,7 +146,7 @@ const NavbarComponent = () => {
         {/* ThemeComponent Start */}
         <ThemeComponent />
         {/* ThemeComponent End  */}
-        {loggedInUser ? (
+        {isUserLoggedIn ? (
           <div className="flex-none">
             {/* Profile Component Start */}
             <div className="dropdown dropdown-end">

@@ -1,26 +1,55 @@
 import React, { useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { useNavigate } from "react-router";
+
+import { signInUserAction } from "../../redux/authRedux/AuthActions";
+import LoadingComponent from "../LoadingComponent/LoadingComponent";
+import {
+  isUserLoggedInState,
+  loggedInUserState,
+} from "../../redux/authRedux/AuthSlice";
+
 const AuthComponent = () => {
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const isUserLoggedIn = useSelector(isUserLoggedInState);
+
+  console.log(isUserLoggedIn);
+  const loggedInUser = useSelector(loggedInUserState);
+
   // & SignIn SignUp toggle
   const [isSignIn, setIsSignIn] = useState(true);
 
   // & Form Data
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    cPassword: "",
-  });
+  const [formData, setFormData] = useState({});
 
   // & SignIn SignUp toggle function
   const toggleSignInSignUp = () => {
     setIsSignIn(!isSignIn);
   };
 
-  // & SignIn Form Submit
-  const signInFormSubmit = (e) => {
-    console.log("Sign In Form Submit");
+  // & Handle input change using e.target.name and e.target.value
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
+  };
+
+  const signInFormSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = formData;
+
+    try {
+      if (!formData.email || !formData.password) {
+        return "Please Fill Out All Fields";
+      }
+      // Add API call or further processing here
+      dispatch(signInUserAction(formData));
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // & SignUp Form Submit
@@ -44,41 +73,44 @@ const AuthComponent = () => {
           {/* Login Form Start  */}
 
           <div className="w-full md:w-1/2 p-4 rounded-box shadow-2xl space-x-4 ml-0 md:ml-4">
-            <fieldset className="fieldset border border-base-400 p-4 rounded-box shadow-2xl">
-              <legend className="fieldset-legend text-2xl">Sign In</legend>
+            <form onSubmit={signInFormSubmit}>
+              <fieldset className="fieldset border border-base-400 p-4 rounded-box shadow-2xl">
+                <legend className="fieldset-legend text-2xl">Sign In</legend>
 
-              <label className="fieldset-label text-lg">Email</label>
-              <input
-                type="email"
-                className="input w-full"
-                placeholder="Email"
-              />
+                <label className="fieldset-label text-lg">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  className="input w-full"
+                  placeholder="Email"
+                />
 
-              <label className="fieldset-label text-lg">Password</label>
-              <input
-                type="password"
-                className="input w-full"
-                placeholder="Password"
-              />
+                <label className="fieldset-label text-lg">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  className="input w-full"
+                  placeholder="Password"
+                />
 
-              <button
-                className="btn btn-neutral mt-4 text-xl"
-                onClick={(e) => signInFormSubmit()}
-              >
-                Sign In
-              </button>
-              <div className="flex items-center my-4">
-                <p className="text-lg mr-3">
-                  If not registered, please register here
-                </p>
-                <button
-                  className="btn btn-neutral"
-                  onClick={toggleSignInSignUp}
-                >
-                  Sign Up
+                <button className="btn btn-neutral mt-4 text-xl" type="submit">
+                  Sign In
                 </button>
-              </div>
-            </fieldset>
+                <div className="flex items-center my-4">
+                  <p className="text-lg mr-3">
+                    If not registered, please register here
+                  </p>
+                  <button
+                    className="btn btn-neutral"
+                    onClick={toggleSignInSignUp}
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              </fieldset>
+            </form>
           </div>
           {/* Login Form End  */}
         </div>
@@ -93,7 +125,7 @@ const AuthComponent = () => {
             />
           </div>
           {/* Login Image End  */}
-          {/* Login Form Start  */}
+          {/* Sign Up Form Start  */}
 
           <div className="w-full md:w-1/2 p-4 rounded-box shadow-2xl space-x-4 ml-0 md:ml-4">
             <fieldset className="fieldset border border-base-400 p-4 rounded-box shadow-2xl">
@@ -121,7 +153,7 @@ const AuthComponent = () => {
 
               <button
                 className="btn btn-neutral mt-4 text-xl"
-                onClick={(e) => signUpFormSubmit()}
+                onClick={(e) => signUpFormSubmit(e)}
               >
                 Sign Up
               </button>
@@ -138,7 +170,7 @@ const AuthComponent = () => {
               </div>
             </fieldset>
           </div>
-          {/* Login Form End  */}
+          {/* Sign Up Form End  */}
         </div>
       )}
     </div>
