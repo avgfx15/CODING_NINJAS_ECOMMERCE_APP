@@ -53,7 +53,7 @@ const NavbarComponent = () => {
               />{" "}
             </svg>
           </div>
-          {/* <ul
+          <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow container2"
           >
@@ -94,7 +94,7 @@ const NavbarComponent = () => {
                 Contact Us
               </NavLink>
             </li>
-          </ul> */}
+          </ul>
         </div>
         {/* responsive Dropdown menu End  */}
         {/* Main Menu Start  */}
@@ -109,13 +109,12 @@ const NavbarComponent = () => {
 
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <NavLink to="/" className="hover:text-lg">
-            <li>
-              <NavLink to="/" className="hover:text-lg">
-                Home
-              </NavLink>
-            </li>
-          </NavLink>
+          <li>
+            <NavLink to="/" className="hover:text-lg">
+              Home
+            </NavLink>
+          </li>
+
           <li>
             <details>
               <summary>Categories</summary>

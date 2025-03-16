@@ -14,9 +14,7 @@ export const signInUserAction = createAsyncThunk(
   "auth/login",
   async (user, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${baseURL}/auth/signin`, user, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.post(`${baseURL}/auth/signin`, user);
 
       return response.data;
     } catch (error) {
@@ -32,9 +30,7 @@ export const signUpUserAction = createAsyncThunk(
   "auth/signup",
   async (user, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${baseURL}/auth/signup`, user, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.post(`${baseURL}/auth/signup`, user);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
