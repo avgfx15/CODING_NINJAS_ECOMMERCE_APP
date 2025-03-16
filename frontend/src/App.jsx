@@ -18,11 +18,16 @@ const App = () => {
 
   return (
     <div className="w-full h-full">
-      <NavbarComponent />{" "}
+      <NavbarComponent />
       <Routes>
         <Route path="/" element={<HomeComponent />} />
-        <Route path="/login" element={<AuthComponent />} />
-        <Route path="/about" element={<h1>About</h1>} />
+        <Route path="/" element={<HomeComponent />} />
+        <Route path="/signin" element={<AuthComponent />} />
+        <Route path="/about" element={<h1 className="h-screen">About</h1>} />
+        <Route
+          path="/contactus"
+          element={<h1 className="h-screen">Contact Us</h1>}
+        />
       </Routes>
       <FooterComponent />
     </div>

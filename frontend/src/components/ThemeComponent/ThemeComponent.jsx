@@ -36,9 +36,9 @@ const ThemeComponent = () => {
       >
         {themes.map((theme) => (
           <li key={theme}>
-            <a onClick={() => dispatch(setTheme(theme))}>
+            <p onClick={() => dispatch(setTheme(theme))}>
               {theme.replace("theme-", "").toUpperCase()}
-            </a>
+            </p>
           </li>
         ))}
       </ul>

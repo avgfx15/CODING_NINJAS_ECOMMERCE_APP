@@ -1,42 +1,57 @@
 import React, { useState } from "react";
 
+// | Importing useDispatch and useSelector from react-redux
 import { useDispatch, useSelector } from "react-redux";
 
+// | Importing useNavigate from react-router
 import { useNavigate } from "react-router";
 
-import { signInUserAction } from "../../redux/authRedux/AuthActions";
+// | Importing signInUserAction from AuthActions
+import {
+  signInUserAction,
+  signUpUserAction,
+} from "../../redux/authRedux/AuthActions";
+
+// | Importing LoadingComponent
 import LoadingComponent from "../LoadingComponent/LoadingComponent";
+
+// | Importing isUserLoggedInState, loggedInUserState from AuthSlice
 import {
   isUserLoggedInState,
   loggedInUserState,
 } from "../../redux/authRedux/AuthSlice";
 
+// & AuthComponent
 const AuthComponent = () => {
+  // @ dispatch variable
   const dispatch = useDispatch();
 
+  // @ useNavigate variable
   const navigate = useNavigate();
 
+  // @ isUserLoggedIn and loggedInUser variables
   const isUserLoggedIn = useSelector(isUserLoggedInState);
 
-  console.log(isUserLoggedIn);
+  // @ loggedInUser variable
   const loggedInUser = useSelector(loggedInUserState);
 
-  // & SignIn SignUp toggle
+  // @ SignIn SignUp toggle
   const [isSignIn, setIsSignIn] = useState(true);
 
-  // & Form Data
+  // @ Form Data
   const [formData, setFormData] = useState({});
 
-  // & SignIn SignUp toggle function
+  // # SignIn SignUp toggle function
   const toggleSignInSignUp = () => {
     setIsSignIn(!isSignIn);
   };
 
-  // & Handle input change using e.target.name and e.target.value
+  // % Handle input change using e.target.name and e.target.value
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
   };
 
+  // # SignIn Form Submit
   const signInFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -44,7 +59,7 @@ const AuthComponent = () => {
       if (!formData.email || !formData.password) {
         return "Please Fill Out All Fields";
       }
-      // Add API call or further processing here
+      // $ Add API call or further processing here
       dispatch(signInUserAction(formData));
       navigate("/");
     } catch (error) {
@@ -52,11 +67,33 @@ const AuthComponent = () => {
     }
   };
 
-  // & SignUp Form Submit
-  const signUpFormSubmit = () => {
-    console.log("Sign Up Form Submit");
+  // # SignUp Form Submit
+  const signUpFormSubmit = (e) => {
+    e.preventDefault();
+
+    try {
+      if (
+        !formData.username ||
+        !formData.email ||
+        !formData.password ||
+        !formData.cPassword
+      ) {
+        return "Please Fill Out All Fields";
+      }
+      // $ check if password and confirm password match
+      if (formData.password !== formData.cPassword) {
+        return "Passwords do not match";
+      }
+
+      // $ Add API call or further processing here
+      dispatch(signUpUserAction(formData));
+      navigate("/singin");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  // ^ Component render start
   return (
     <div className="flex justify-center items-center md:h-screen my-5 h-fit w-full">
       {isSignIn ? (
@@ -131,9 +168,20 @@ const AuthComponent = () => {
             <fieldset className="fieldset border border-base-400 p-4 rounded-box shadow-2xl">
               <legend className="fieldset-legend text-2xl">Sign Up</legend>
 
+              <label className="fieldset-label text-lg">Username</label>
+              <input
+                type="username"
+                name="username"
+                className="input w-full"
+                placeholder="Email"
+                onChange={handleChange}
+              />
+
               <label className="fieldset-label text-lg">Email</label>
               <input
                 type="email"
+                name="email"
+                onChange={handleChange}
                 className="input w-full"
                 placeholder="Email"
               />
@@ -141,12 +189,16 @@ const AuthComponent = () => {
               <label className="fieldset-label text-lg">Password</label>
               <input
                 type="password"
+                name="password"
+                onChange={handleChange}
                 className="input w-full"
                 placeholder="Password"
               />
               <label className="fieldset-label text-lg">Confirm Password</label>
               <input
                 type="cPassword"
+                name="cPassword"
+                onChange={handleChange}
                 className="input w-full"
                 placeholder="Confirm Password"
               />

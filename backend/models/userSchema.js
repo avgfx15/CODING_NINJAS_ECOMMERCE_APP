@@ -4,6 +4,12 @@ import mongoose from "mongoose";
 // @ Declare the Schema of the Mongo model
 const userSchema = new mongoose.Schema(
   {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true, // Removes extra spaces
+    },
     email: {
       type: String,
       required: true,

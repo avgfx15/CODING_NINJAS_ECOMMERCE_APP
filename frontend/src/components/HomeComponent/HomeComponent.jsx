@@ -7,7 +7,7 @@ const HomeComponent = () => {
   const loggedInUser = useSelector(loggedInUserState);
 
   return (
-    <div className="h-screen border-t-2 border-gray-600">
+    <div className="h-screen">
       <CarouselComponent />
     </div>
   );

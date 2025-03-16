@@ -1,15 +1,19 @@
 import React from "react";
 import ThemeComponent from "../ThemeComponent/ThemeComponent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   isUserLoggedInState,
   loggedInUserState,
   userLoadingState,
 } from "../../redux/authRedux/AuthSlice";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import LoadingComponent from "../LoadingComponent/LoadingComponent";
+import { logoutUserAction } from "../../redux/authRedux/AuthActions";
 
 const NavbarComponent = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const loggedInUser = useSelector(loggedInUserState);
 
   const isUserLoggedIn = useSelector(isUserLoggedInState);
@@ -20,8 +24,15 @@ const NavbarComponent = () => {
     return <LoadingComponent />;
   }
 
+  // # handle logout functionality
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(logoutUserAction());
+    navigate("/");
+  };
+
   return (
-    <div className="navbar  shadow-sm mx-auto border-b- border-purple-100">
+    <div className="navbar  shadow-sm mx-auto border-b border-purple-100 px-5">
       <div className="navbar-start">
         {/* responsive Dropdown menu start  */}
         <div className="dropdown">
@@ -42,33 +53,55 @@ const NavbarComponent = () => {
               />{" "}
             </svg>
           </div>
-          <ul
+          {/* <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow container2"
           >
             <li>
-              <a>Item 1</a>
+              <NavLink to="/" className="hover:text-lg">
+                Home
+              </NavLink>
             </li>
             <li>
-              <a>Parent</a>
+              <NavLink to="/category" className="hover:text-lg">
+                Category
+              </NavLink>
               <ul className="p-2">
                 <li>
-                  <a>Submenu 1</a>
+                  <NavLink to="/cat" className="hover:text-lg">
+                    Submenu 1
+                  </NavLink>
                 </li>
                 <li>
-                  <a>Submenu 2</a>
+                  <NavLink to="/cat" className="hover:text-lg">
+                    Submenu 2
+                  </NavLink>
                 </li>
               </ul>
             </li>
             <li>
-              <a>Item 3</a>
+              <NavLink to="/blog" className="hover:text-lg">
+                Blog
+              </NavLink>
             </li>
-          </ul>
+            <li>
+              <NavLink to="/about" className="hover:text-lg">
+                About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contactus" className="hover:text-lg">
+                Contact Us
+              </NavLink>
+            </li>
+          </ul> */}
         </div>
         {/* responsive Dropdown menu End  */}
         {/* Main Menu Start  */}
         {/* Main Head Name Start */}
-        <a className="btn btn-ghost text-xl">OmniShop</a>
+        <NavLink to="/" className="btn btn-ghost text-xl">
+          OmniShop
+        </NavLink>
         {/* Main Head Name End */}
       </div>
 
@@ -78,24 +111,37 @@ const NavbarComponent = () => {
         <ul className="menu menu-horizontal px-1">
           <NavLink to="/" className="hover:text-lg">
             <li>
-              <a>Home</a>
+              <NavLink to="/" className="hover:text-lg">
+                Home
+              </NavLink>
             </li>
           </NavLink>
           <li>
             <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
+              <summary>Categories</summary>
+              <ul className="p-2 container2 z-[1] w-36">
                 <li>
-                  <a>Submenu 1</a>
+                  <NavLink to="/cat" className="hover:text-lg">
+                    Category 1
+                  </NavLink>
                 </li>
                 <li>
-                  <a>Submenu 2</a>
+                  <NavLink to="/cat" className="hover:text-lg">
+                    Category 2
+                  </NavLink>
                 </li>
               </ul>
             </details>
           </li>
           <li>
-            <a>Item 3</a>
+            <NavLink to="/about" className="hover:text-lg">
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/contactus" className="hover:text-lg">
+              Contact Us
+            </NavLink>
           </li>
         </ul>
       </div>
@@ -148,8 +194,8 @@ const NavbarComponent = () => {
         {/* ThemeComponent End  */}
         {isUserLoggedIn ? (
           <div className="flex-none">
-            {/* Profile Component Start */}
-            <div className="dropdown dropdown-end">
+            {/* Cart Icon Start */}
+            <div className="dropdown dropdown-end mr-3">
               <div
                 tabIndex={0}
                 role="button"
@@ -174,6 +220,8 @@ const NavbarComponent = () => {
                   <span className="badge badge-sm indicator-item">8</span>
                 </div>
               </div>
+              {/*  Cart Icon end  */}
+              {/* Profile Component Start */}
               <div
                 tabIndex={0}
                 className="card card-compact dropdown-content z-1 mt-3 w-52 shadow"
@@ -204,19 +252,23 @@ const NavbarComponent = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content container2 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">
+                  <NavLink to="/profile" className="justify-between">
                     Profile
                     <span className="badge">New</span>
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <NavLink to="/settings" className="justify-between">
+                    Settings
+                  </NavLink>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <button className="justify-between" onClick={handleLogout}>
+                    Logout
+                  </button>
                 </li>
               </ul>
             </div>
@@ -226,7 +278,7 @@ const NavbarComponent = () => {
           <div className="flex-none">
             {/* User not loggedIn then show login button Start  */}
             <button className="btn btn-primary">
-              <Link to="/login">Login</Link>
+              <NavLink to="/signin">Sign In</NavLink>
             </button>
             {/* User not loggedIn then show login button End  */}
           </div>

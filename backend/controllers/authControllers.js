@@ -25,10 +25,10 @@ export const authTestController = async (req, res, next) => {
 // + User SignUp
 export const authSignUpController = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
 
     // $ if email or password not entered
-    if (!email || !password) {
+    if (!username || !email || !password) {
       return next(new ErrorHandler(400, "Please provide email and password"));
     }
     // $ Check user is Exist or not
@@ -45,6 +45,7 @@ export const authSignUpController = async (req, res, next) => {
 
     // @ newUser with hashPassword
     const newUser = new UserModel({
+      username,
       email,
       password: hashPassword,
     });
@@ -58,7 +59,7 @@ export const authSignUpController = async (req, res, next) => {
     // $ Send response to client
     return res.status(201).json({
       successStatus: true,
-      message: `New user ${email} saved successfully!!!`,
+      message: `New user ${username} saved successfully!!!`,
     });
   } catch (error) {
     errorLog("Error to signUp user");
@@ -85,7 +86,12 @@ export const authSignInController = async (req, res, next) => {
 
     // @ create token with user data
     const token = await jwt.sign(
-      { id: userExist.id, email: userExist.email, role: userExist.role },
+      {
+        id: userExist.id,
+        username: userExist.username,
+        email: userExist.email,
+        role: userExist.role,
+      },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES_IN }
     );
@@ -103,9 +109,25 @@ export const authSignInController = async (req, res, next) => {
     // $ Send response to client
     return res.status(201).json({
       successStatus: true,
-      message: `User, ${userExist.email} logged in successfully!!!`,
+      message: `User, ${userExist.username} logged in successfully!!!`,
       loggedInUser: withOutPassword,
       token,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+// + User SignOut
+export const authLogoutController = async (req, res, next) => {
+  try {
+    console.log("Delete cookie");
+
+    // $ Remove Cookie
+    res.clearCookie("authToken");
+    return res.status(200).json({
+      successStatus: true,
+      message: `User logged out successfully!!!`,
     });
   } catch (error) {
     return next(error);

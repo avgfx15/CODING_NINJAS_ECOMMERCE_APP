@@ -1,6 +1,14 @@
+// | import createSlice from redux toolkit
 import { createSlice } from "@reduxjs/toolkit";
-import { signInUserAction } from "./AuthActions";
 
+// | import signInUserAction from AuthActions
+import {
+  logoutUserAction,
+  signInUserAction,
+  signUpUserAction,
+} from "./AuthActions";
+
+// @ initialState variable
 const initialState = {
   users: null,
   isUserLoggedIn: false,
@@ -10,28 +18,64 @@ const initialState = {
   userSuccessStatus: false,
 };
 
+// # AuthSlice for redux toolkit
 const AuthSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // ? signInUserAction
       .addCase(signInUserAction.pending, (state) => {
         state.userLoading = true;
       })
+      // / signInUserAction
       .addCase(signInUserAction.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.userLoading = false;
         state.isUserLoggedIn = true;
         state.loggedInUser = action.payload.loggedInUser;
         state.userSuccessStatus = action.payload.successStatus;
         state.userMessage = action.payload.message;
       })
+      // ! signInUserAction
       .addCase(signInUserAction.rejected, (state, action) => {
         state.userLoading = false;
         state.userSuccessStatus = false;
         state.userMessage = action.payload.message;
       });
+    // ? signUpUserAction
+    builder
+      .addCase(signUpUserAction.pending, (state) => {
+        state.userLoading = true;
+      })
+      // / signUpUserAction
+      .addCase(signUpUserAction.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.userSuccessStatus = action.payload.successStatus;
+        state.userMessage = action.payload.message;
+      })
+      // ! signUpUserAction
+      .addCase(signUpUserAction.rejected, (state, action) => {
+        state.userLoading = false;
+        state.userSuccessStatus = false;
+        state.userMessage = action.payload.message;
+      });
+    // ? logOutUserAction
+    builder.addCase(logoutUserAction.pending, (state) => {
+      state.userLoading = true;
+    });
+    // / logOutUserAction
+    builder.addCase(logoutUserAction.fulfilled, (state, action) => {
+      state.userLoading = false;
+      state.isUserLoggedIn = false;
+      state.loggedInUser = null;
+    });
+    // ! logOutUserAction
+    builder.addCase(logoutUserAction.rejected, (state, action) => {
+      state.userLoading = false;
+      state.userSuccessStatus = false;
+      state.userMessage = action.payload.message;
+    });
   },
 });
 

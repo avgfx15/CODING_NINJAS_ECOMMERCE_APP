@@ -5,10 +5,10 @@ import "./LoadingComponent.css";
 const LoadingComponent = () => {
   return (
     <div className="loadingContainer">
-      <div class="loader">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+      <div className="loader">
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
       </div>
     </div>
   );
