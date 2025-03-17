@@ -20,10 +20,6 @@ const NavbarComponent = () => {
 
   const userLoading = useSelector(userLoadingState);
 
-  if (userLoading) {
-    return <LoadingComponent />;
-  }
-
   // # handle logout functionality
   const handleLogout = () => {
     localStorage.removeItem("token");

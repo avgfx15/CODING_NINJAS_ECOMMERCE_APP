@@ -102,7 +102,7 @@ export const authSignInController = async (req, res, next) => {
     // Store Token in HttpOnly Cookie
     res.cookie("authToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      secure: false,
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
@@ -124,7 +124,10 @@ export const authLogoutController = async (req, res, next) => {
     console.log("Delete cookie");
 
     // $ Remove Cookie
-    res.clearCookie("authToken");
+    await res.clearCookie("authToken", {
+      httpOnly: true,
+      secure: false,
+    });
     return res.status(200).json({
       successStatus: true,
       message: `User logged out successfully!!!`,

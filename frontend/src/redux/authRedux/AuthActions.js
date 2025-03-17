@@ -14,7 +14,9 @@ export const signInUserAction = createAsyncThunk(
   "auth/login",
   async (user, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${baseURL}/auth/signin`, user);
+      const response = await axios.post(`${baseURL}/auth/signin`, user, {
+        withCredentials: true,
+      });
 
       return response.data;
     } catch (error) {
@@ -46,10 +48,16 @@ export const logoutUserAction = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       // Clear user session (e.g., remove token from localStorage)
-      localStorage.removeItem("userToken");
-      return true; // Return success
+      // This is a placeholder, you should implement the actual logout logic
+      // For example, you might call an API endpoint to invalidate the user's session
+      const response = await axios.post(
+        "http://localhost:3150/api/v1/auth/logout",
+        {},
+        { withCredentials: true } // Ensure cookies are sent
+      );
+      return response.data;
     } catch (error) {
-      return rejectWithValue("Logout failed!");
+      return rejectWithValue(error.response.data);
     }
   }
 );

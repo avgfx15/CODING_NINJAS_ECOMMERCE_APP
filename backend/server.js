@@ -31,7 +31,14 @@ import { errorHandlerMiddleware } from "./middlewares/errorHandler.js";
 // ` Middleware configure
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+
+// | Configure CORS
+const corsOptions = {
+  origin: ["http://localhost:3000", "http://localhost:5173"], // Allow both ports
+  credentials: true, // Allow cookies to be sent
+};
+app.use(cors(corsOptions));
+// | Configure cookie-parser
 app.use(cookieParser());
 dotenv.config();
 
@@ -44,7 +51,7 @@ app.use("/api/v1/products", productRouter);
 app.use(errorHandlerMiddleware);
 
 // @ Start the server on port 3000
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3150;
 
 // % Default route
 app.get("/", (req, res) => res.send("Hello World!"));

@@ -66,9 +66,12 @@ const AuthSlice = createSlice({
     });
     // / logOutUserAction
     builder.addCase(logoutUserAction.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.userLoading = false;
       state.isUserLoggedIn = false;
       state.loggedInUser = null;
+      state.userMessage = action.payload.message;
+      state.userSuccessStatus = action.payload.successStatus;
     });
     // ! logOutUserAction
     builder.addCase(logoutUserAction.rejected, (state, action) => {
