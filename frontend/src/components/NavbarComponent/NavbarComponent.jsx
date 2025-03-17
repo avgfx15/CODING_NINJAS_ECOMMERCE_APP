@@ -2,9 +2,9 @@ import React from "react";
 import ThemeComponent from "../ThemeComponent/ThemeComponent";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  authLoadingState,
   isUserLoggedInState,
   loggedInUserState,
-  userLoadingState,
 } from "../../redux/authRedux/AuthSlice";
 import { Link, NavLink, useNavigate } from "react-router";
 import LoadingComponent from "../LoadingComponent/LoadingComponent";
@@ -18,7 +18,7 @@ const NavbarComponent = () => {
 
   const isUserLoggedIn = useSelector(isUserLoggedInState);
 
-  const userLoading = useSelector(userLoadingState);
+  const authLoading = useSelector(authLoadingState);
 
   // # handle logout functionality
   const handleLogout = () => {

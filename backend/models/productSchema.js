@@ -19,24 +19,47 @@ const productSchema = new mongoose.Schema(
       ref: "Category",
       required: true,
     },
-    productImage: {
+    brand: {
       type: String,
-    },
-    colorVariants: {
-      type: [String],
-      default: ["Blue", "Silver", "Black"],
-    },
-    size: {
-      type: String,
-    },
-    qty: {
-      type: Number,
-      default: 1,
     },
     price: {
       type: Number,
-      require: true,
+      required: true,
     },
+    discount: {
+      type: Number,
+      default: 0,
+    },
+    stock: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    isFeatured: {
+      type: Boolean,
+      default: false,
+    },
+    isPublished: {
+      type: Boolean,
+      default: false,
+    },
+    productImages: [
+      {
+        type: String,
+        required: true,
+      },
+    ], // Array of image URLs
+    attributes: [
+      {
+        key: { type: String }, // e.g., "Size", "Color", "Weight"
+        value: { type: String }, // e.g., "L", "Red", "5kg"
+      },
+    ],
+    ratings: {
+      average: { type: Number, default: 0 },
+      totalReviews: { type: Number, default: 0 },
+    },
+
     sellerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User", // Reference to UserSchema
