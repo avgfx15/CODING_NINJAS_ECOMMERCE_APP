@@ -10,7 +10,6 @@ import {
 
 // @ initialState variable
 const initialState = {
-  users: null,
   isUserLoggedIn: false,
   loggedInUser: null,
   authMessage: null,
@@ -66,7 +65,6 @@ const AuthSlice = createSlice({
     });
     // / logOutUserAction
     builder.addCase(logoutUserAction.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.authLoading = false;
       state.isUserLoggedIn = false;
       state.loggedInUser = null;
@@ -82,13 +80,24 @@ const AuthSlice = createSlice({
   },
 });
 
-export const AuthReducers = AuthSlice.reducer;
+// ~ export AuthReducer
+const AuthReducer = AuthSlice.reducer;
+export default AuthReducer;
 
-export const usersState = (state) => state.AuthReducers.users;
-export const isUserLoggedInState = (state) =>
-  state.AuthReducers?.isUserLoggedIn;
-export const loggedInUserState = (state) => state.AuthReducers?.loggedInUser;
-export const authMessageStete = (state) => state.AuthReducers?.authMessage;
-export const authLoadingState = (state) => state.AuthReducers?.authLoading;
+// ~ export auth state
+
+// ~ export isUserLoggedIn state
+export const isUserLoggedInState = (state) => state.AuthReducer?.isUserLoggedIn;
+
+// ~ export loggedInUser state
+export const loggedInUserState = (state) => state.AuthReducer?.loggedInUser;
+
+// ~ export authMessage state
+export const authMessageStete = (state) => state.AuthReducer?.authMessage;
+
+// ~ export authLoading state
+export const authLoadingState = (state) => state.AuthReducer?.authLoading;
+
+// ~ export authSuccessStatus state
 export const authSuccessStatusState = (state) =>
-  state.AuthReducers?.authSuccessStatus;
+  state.AuthReducer?.authSuccessStatus;

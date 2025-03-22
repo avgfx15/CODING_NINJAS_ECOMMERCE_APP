@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CarouselComponent from "../CarouselComponent/CarouselComponent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loggedInUserState } from "../../redux/authRedux/AuthSlice";
+import { getUserProfileByLoggedInUserAction } from "../../redux/userRedux/userActions";
 
 const HomeComponent = () => {
-  const loggedInUser = useSelector(loggedInUserState);
-
   return (
     <div className="h-screen">
       <CarouselComponent />

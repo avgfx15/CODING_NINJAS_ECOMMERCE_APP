@@ -3,9 +3,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // | import axios
 import axios from "axios";
+import { axiosInstance } from "../axiosInstance";
 
-// @ baseURL variable
-const baseURL = "http://localhost:3150/api/v1";
+// | import axiosInstance
 
 // # signInUserAction
 // @ description: This function is used to handle the sign in user action
@@ -14,9 +14,7 @@ export const signInUserAction = createAsyncThunk(
   "auth/login",
   async (user, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${baseURL}/auth/signin`, user, {
-        withCredentials: true,
-      });
+      const response = await axiosInstance.post(`/auth/signin`, user);
 
       return response.data;
     } catch (error) {
@@ -32,7 +30,8 @@ export const signUpUserAction = createAsyncThunk(
   "auth/signup",
   async (user, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${baseURL}/auth/signup`, user);
+      const response = await axiosInstance.post(`/auth/signup`, user);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -46,15 +45,16 @@ export const signUpUserAction = createAsyncThunk(
 export const logoutUserAction = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
+    console.log("delete user session");
     try {
       // Clear user session (e.g., remove token from localStorage)
       // This is a placeholder, you should implement the actual logout logic
       // For example, you might call an API endpoint to invalidate the user's session
-      const response = await axios.post(
-        "http://localhost:3150/api/v1/auth/logout",
-        {},
-        { withCredentials: true } // Ensure cookies are sent
-      );
+      const response = await axiosInstance.post("/auth/logout", {});
+      // Remove token from localStorage
+
+      localStorage.removeItem("persist:root");
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

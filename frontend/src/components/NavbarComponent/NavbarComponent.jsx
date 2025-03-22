@@ -1,32 +1,66 @@
-import React from "react";
-import ThemeComponent from "../ThemeComponent/ThemeComponent";
+// | import useEffect
+import React, { useEffect } from "react";
+
+// | import react-redux hook
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router";
+
+// | import ThemeComponent
+import ThemeComponent from "../ThemeComponent/ThemeComponent";
+
+// | import loading Component
+import LoadingComponent from "../LoadingComponent/LoadingComponent";
+
+// | import auth State
 import {
   authLoadingState,
   isUserLoggedInState,
   loggedInUserState,
 } from "../../redux/authRedux/AuthSlice";
-import { Link, NavLink, useNavigate } from "react-router";
-import LoadingComponent from "../LoadingComponent/LoadingComponent";
+
+// | import auth Actions
 import { logoutUserAction } from "../../redux/authRedux/AuthActions";
 
+// | import user State
+import { userProfileState } from "../../redux/userRedux/userSlice";
+
+// | import user Actions
+import { getUserProfileByLoggedInUserAction } from "../../redux/userRedux/userActions";
+
+// & Navbar Component
 const NavbarComponent = () => {
+  // @ dispatch variable
   const dispatch = useDispatch();
+
+  // @ navigate variable
   const navigate = useNavigate();
 
+  // @ loggedInUser State value
   const loggedInUser = useSelector(loggedInUserState);
 
+  // @ userProfile State value
+  const userProfile = useSelector(userProfileState);
+
+  // @ authLoading State value
   const isUserLoggedIn = useSelector(isUserLoggedInState);
 
+  // @ authLoading State value
   const authLoading = useSelector(authLoadingState);
 
   // # handle logout functionality
   const handleLogout = () => {
-    localStorage.removeItem("token");
     dispatch(logoutUserAction());
     navigate("/");
   };
 
+  // / Get LoggedInUser Profile
+  useEffect(() => {
+    if (loggedInUser) {
+      dispatch(getUserProfileByLoggedInUserAction(loggedInUser));
+    }
+  }, [dispatch, loggedInUser]);
+
+  // ^ Navbar return render
   return (
     <div className="navbar  shadow-sm mx-auto border-b border-purple-100 px-5">
       <div className="navbar-start">
@@ -215,8 +249,7 @@ const NavbarComponent = () => {
                   <span className="badge badge-sm indicator-item">8</span>
                 </div>
               </div>
-              {/*  Cart Icon end  */}
-              {/* Profile Component Start */}
+
               <div
                 tabIndex={0}
                 className="card card-compact dropdown-content z-1 mt-3 w-52 shadow"
@@ -232,6 +265,8 @@ const NavbarComponent = () => {
                 </div>
               </div>
             </div>
+            {/*  Cart Icon end  */}
+            {/* Profile Component Start */}
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -240,8 +275,12 @@ const NavbarComponent = () => {
               >
                 <div className="w-10 rounded-full">
                   <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    alt="user Profile"
+                    src={
+                      userProfile?.profileImage
+                        ? userProfile.profileImage
+                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDXHyqEEcIEQzggUF5RIBe8g37M9n1guqKhg&s"
+                    }
                   />
                 </div>
               </div>
@@ -249,6 +288,11 @@ const NavbarComponent = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content container2 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
+                <li className="">
+                  <NavLink to="/profile" className="justify-between text-lg">
+                    {userProfile?.name}
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink to="/profile" className="justify-between">
                     Profile

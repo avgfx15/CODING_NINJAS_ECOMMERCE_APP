@@ -9,8 +9,13 @@ import { selectTheme } from "./redux/themeSlice";
 import { useSelector } from "react-redux";
 import FooterComponent from "./components/FooterComponent/FooterComponent";
 import AuthComponent from "./components/AuthComponent/AuthComponent";
+import ProfileComponent from "./components/ProfileComponent/ProfileComponent";
+import { loggedInUserState } from "./redux/authRedux/AuthSlice";
+import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 
 const App = () => {
+  const loggedInUser = useSelector(loggedInUserState);
+
   const theme = useSelector(selectTheme);
   useEffect(() => {
     document.body.className = theme;
@@ -21,13 +26,16 @@ const App = () => {
       <NavbarComponent />
       <Routes>
         <Route path="/" element={<HomeComponent />} />
-        <Route path="/" element={<HomeComponent />} />
+        {loggedInUser && (
+          <Route path="/profile" element={<ProfileComponent />} />
+        )}
         <Route path="/signin" element={<AuthComponent />} />
         <Route path="/about" element={<h1 className="h-screen">About</h1>} />
         <Route
           path="/contactus"
           element={<h1 className="h-screen">Contact Us</h1>}
         />
+        <Route path="*" element={<ErrorComponent />} />
       </Routes>
       <FooterComponent />
     </div>

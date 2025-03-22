@@ -99,11 +99,20 @@ export const authSignInController = async (req, res, next) => {
     // $ Destructure user Data to send via json without password
     const { password: _, ...withOutPassword } = userExist._doc;
 
-    // Store Token in HttpOnly Cookie
+    if (!token) {
+      // $ Remove Cookie
+      await res.clearCookie("authToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+      });
+      return next(new ErrorHandler(401, "Token not generated"));
+    }
+    // $ Store Token in HttpOnly Cookie
     res.cookie("authToken", token, {
       httpOnly: true,
       secure: false,
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      maxAge: 5 * 60 * 1000,
     });
 
     // $ Send response to client
@@ -121,12 +130,12 @@ export const authSignInController = async (req, res, next) => {
 // + User SignOut
 export const authLogoutController = async (req, res, next) => {
   try {
-    console.log("Delete cookie");
-
+    // $ Send response to client
     // $ Remove Cookie
     await res.clearCookie("authToken", {
       httpOnly: true,
-      secure: false,
+      secure: true,
+      sameSite: "Strict",
     });
     return res.status(200).json({
       successStatus: true,

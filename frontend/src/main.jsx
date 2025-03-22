@@ -6,15 +6,19 @@ import { BrowserRouter } from "react-router";
 import { store, persistor } from "./store.js";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { setupAxiosInterceptors } from "./redux/axiosInstance.js";
+
+// Initialize Axios Interceptors
+setupAxiosInterceptors();
 
 createRoot(document.getElementById("root")).render(
-  <PersistGate persistor={persistor}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <PersistGate persistor={persistor} loading={null}>
       <BrowserRouter>
         <StrictMode>
           <App />
         </StrictMode>
       </BrowserRouter>
-    </Provider>
-  </PersistGate>
+    </PersistGate>
+  </Provider>
 );

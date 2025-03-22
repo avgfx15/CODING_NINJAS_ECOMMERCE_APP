@@ -1,19 +1,22 @@
 // | import createSlice
-import { createSlice } from "reduxjs/toolkit";
+
+import { createSlice } from "@reduxjs/toolkit";
+import { getUserProfileByLoggedInUserAction } from "./userActions";
+import { logoutUserAction } from "../authRedux/AuthActions";
 
 // @ initialState variable
 const initialState = {
   // @ user object
-  user: {},
+  userProfile: {},
   // @ loading boolean
-  userLoading: false,
+  userProfileLoading: false,
   // @ error string
-  userMessage: null,
-  userSuccessStatus: false,
+  userProfileMessage: null,
+  userProfileSuccessStatus: false,
 };
 
 // @ createSlice function
-const userSlice = createSlice({
+const UserSlice = createSlice({
   // @ name of the slice
   name: "user",
   // @ initial state
@@ -22,22 +25,54 @@ const userSlice = createSlice({
   reducers: {},
   // @ extraReducers
   extraReducers: (builder) => {
-    // @ user loading reducer
+    builder.addCase(getUserProfileByLoggedInUserAction.pending, (state) => {
+      state.userProfileLoading = true;
+      state.userProfileSuccessStatus = false;
+      state.userProfileMessage = null;
+    });
+    builder.addCase(
+      getUserProfileByLoggedInUserAction.fulfilled,
+      (state, action) => {
+        state.userProfileLoading = false;
+        state.userProfileSuccessStatus = true;
+        state.userProfile = action.payload.userProfile;
+        state.userProfileMessage = action.payload.message;
+      }
+    );
+    builder.addCase(
+      getUserProfileByLoggedInUserAction.rejected,
+      (state, action) => {
+        console.log(action.payload);
+        state.userProfileLoading = false;
+        state.userProfileSuccessStatus = false;
+        state.userProfileMessage = action.payload;
+      }
+    );
+    // / logOutUserAction
+    builder.addCase(logoutUserAction.fulfilled, (state, action) => {
+      state.userProfile = {};
+      state.userProfileLoading = false;
+      state.userProfileMessage = action.payload.message;
+    });
   },
 });
 
 // ~ export User Reducer
-export const UserReducer = userSlice.reducer;
+const UserReducers = UserSlice.reducer;
+
+export default UserReducers;
 
 // ~ export user state
-export const userState = (state) => state.UserReducer.user;
+export const userProfileState = (state) => state.UserReducers?.userProfile;
 
-// ~ export userLoading State
-export const userLoadingState = (state) => state.UserReducer.userLoading;
+// ~ export userProfileLoading State
+export const userProfileLoadingState = (state) =>
+  state.UserReducers?.userProfileLoading;
 
-// ~ export userMessage State
-export const userMessageState = (state) => state.UserReducer.userMessage;
+// ~ export userProfileMessage State
+export const userProfileMessageState = (state) =>
+  state.UserReducers?.userProfileMessage;
 
-// ~ export userSuccessStatus State
-export const userSuccessStatusState = (state) =>
-  state.UserReducer.userSuccessStatus;
+// ~ export userProfileSuccessStatus State
+export const userProfileSuccessStatusState = (state) =>
+  state.UserReducers?.userProfileSuccessStatus;
