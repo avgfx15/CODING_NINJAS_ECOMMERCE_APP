@@ -1,5 +1,5 @@
 // | import chalk Log Styling
-import { redis } from "../config/redisCache.js";
+import { generateCacheKey, redis } from "../config/redisCache.js";
 import { ErrorHandler } from "../middlewares/errorHandler.js";
 import UserProfileModel from "../models/userProfileSchema.js";
 import UserModel from "../models/userSchema.js";
@@ -68,6 +68,10 @@ export const getUserProfileController = async (req, res, next) => {
   try {
     const loggedInUser = req.user;
 
+    // ^ Get Redis Cache
+
+    const key = generateCacheKey(req);
+
     const profileExist = await UserProfileModel.findOne({
       userId: loggedInUser.id,
     }).populate("userId");
@@ -99,9 +103,10 @@ export const getAllUsersUserProfileController = async (req, res, next) => {
     if (userExist.role !== "Admin") {
       return next(new ErrorHandler(401, "You are not authorized"));
     }
-    // % Get Data From Cache
-    const cachedProducts = await redis.get("getAllUserProfile");
-    // % If Data exist in Cache
+    // ^ Get Data From Cache
+    const key = generateCacheKey(req);
+    const cachedProducts = await redis.get(key);
+    // ^ If Data exist in Cache
     if (cachedProducts) {
       return res.json(JSON.parse(cachedProducts));
     }
@@ -109,13 +114,8 @@ export const getAllUsersUserProfileController = async (req, res, next) => {
     // $ User is Admin
     const allUsersProfile = await UserProfileModel.find().populate("userId");
 
-    // % If Data exist in Cache
-    await redis.set(
-      "getAllUserProfile",
-      JSON.stringify(allUsersProfile),
-      "EX",
-      3600
-    ); // Cache for 1 hour
+    // ^ If Data exist in Cache
+    await redis.set(key, JSON.stringify(allUsersProfile), "EX", 3600); // Cache for 1 hour
 
     // ~ send response
     return res.status(200).json({
@@ -134,21 +134,36 @@ export const getUserProfileByIdController = async (req, res, next) => {
     // @ loggedInUser variable
     const loggedInUser = req.user;
 
-    // % Check user is Admin or not
-    if (loggedInUser.role !== "Admin") {
-      return next(new ErrorHandler(401, "You are not authorized"));
-    }
-
     // $ Get user id from params
     const { id } = req.params;
 
+    // % Check user is Admin or not
+    if (loggedInUser.role !== "Admin" && id !== loggedInUser.id) {
+      return next(new ErrorHandler(401, "You are not authorized"));
+    }
+
+    // ^ Get Profile By Id
+    const key = generateCacheKey(req);
+
+    const cachedProduct = await redis.get(key);
+
+    // ^ If Data exist in Cache
+    if (cachedProduct) {
+      return res.json(JSON.parse(cachedProduct));
+    }
+
     // % Check user id is valid or not and Profile is Exist or not
-    const profileExist = await UserProfileModel.findById(id).populate("userId");
+    const profileExist = await UserProfileModel.findOne({
+      userId: id,
+    }).populate("userId");
 
     // % Profile does not exist
     if (!profileExist) {
       return next(new ErrorHandler(401, "Profile does not exist"));
     }
+
+    // ^ If Data exist in Cache
+    await redis.set(key, JSON.stringify(profileExist), "EX", 3600); // Cache for 1 hour
 
     // ~ send response with userProfile
     return res.status(200).json({
@@ -167,6 +182,17 @@ export const updateUserProfileController = async (req, res, next) => {
     // @ loggedInUser variable
     const loggedInUser = req.user;
 
+    // ^ Get Profile By Id
+    const key = generateCacheKey(req);
+
+    const checkKeys = await redis.keys(key);
+
+    // ^ If Data exist in Cache
+    if (checkKeys.length > 0) {
+      await redis.del("getallusersprofile");
+      await redis.del(key);
+    }
+
     // % Check user id is valid or not and Profile is Exist or not
     const profileExist = await UserProfileModel.findOne({
       userId: loggedInUser.id,
@@ -184,6 +210,15 @@ export const updateUserProfileController = async (req, res, next) => {
         new: true,
       }
     );
+
+    // ^ If Data exist in Cache
+    await redis.set(
+      `getprofile/${loggedInUser.id}`,
+      JSON.stringify(updatedProfile),
+      "EX",
+      3600
+    ); // Cache for 1 hour
+
     // ~ send response
     return res.status(200).json({
       successStatus: true,
