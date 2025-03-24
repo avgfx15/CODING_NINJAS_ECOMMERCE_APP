@@ -55,8 +55,13 @@ const NavbarComponent = () => {
 
   // / Get LoggedInUser Profile
   useEffect(() => {
-    if (loggedInUser) {
+    if (isUserLoggedIn && loggedInUser) {
+      console.log(loggedInUser);
+
       dispatch(getUserProfileByLoggedInUserAction(loggedInUser));
+    } else {
+      dispatch(logoutUserAction());
+      navigate("/");
     }
   }, [dispatch, loggedInUser]);
 

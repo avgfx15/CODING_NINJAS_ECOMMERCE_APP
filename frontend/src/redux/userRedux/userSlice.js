@@ -42,7 +42,6 @@ const UserSlice = createSlice({
     builder.addCase(
       getUserProfileByLoggedInUserAction.rejected,
       (state, action) => {
-        console.log(action.payload);
         state.userProfileLoading = false;
         state.userProfileSuccessStatus = false;
         state.userProfileMessage = action.payload;

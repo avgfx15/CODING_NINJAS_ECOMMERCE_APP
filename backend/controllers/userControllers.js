@@ -1,4 +1,5 @@
 // | import chalk Log Styling
+import { redis } from "../config/redisCache.js";
 import { ErrorHandler } from "../middlewares/errorHandler.js";
 import UserProfileModel from "../models/userProfileSchema.js";
 import UserModel from "../models/userSchema.js";
@@ -98,8 +99,24 @@ export const getAllUsersUserProfileController = async (req, res, next) => {
     if (userExist.role !== "Admin") {
       return next(new ErrorHandler(401, "You are not authorized"));
     }
+    // % Get Data From Cache
+    const cachedProducts = await redis.get("getAllUserProfile");
+    // % If Data exist in Cache
+    if (cachedProducts) {
+      return res.json(JSON.parse(cachedProducts));
+    }
+
     // $ User is Admin
     const allUsersProfile = await UserProfileModel.find().populate("userId");
+
+    // % If Data exist in Cache
+    await redis.set(
+      "getAllUserProfile",
+      JSON.stringify(allUsersProfile),
+      "EX",
+      3600
+    ); // Cache for 1 hour
+
     // ~ send response
     return res.status(200).json({
       successStatus: true,
