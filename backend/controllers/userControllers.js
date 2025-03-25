@@ -68,6 +68,8 @@ export const getUserProfileController = async (req, res, next) => {
   try {
     const loggedInUser = req.user;
 
+    console.log(loggedInUser);
+
     // ^ Get Redis Cache
 
     const key = generateCacheKey(req);

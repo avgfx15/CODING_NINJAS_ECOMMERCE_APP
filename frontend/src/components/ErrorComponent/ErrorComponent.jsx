@@ -1,16 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router";
 
-const ErrorComponent = () => {
+const ErrorComponent = ({ message }) => {
+  console.log(message);
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold text-red-600">
-        Oops! Something went wrong.
-      </h1>
-
-      <NavLink to="/" className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
-        Go Back Home
-      </NavLink>
+    <div className="bg-red-600 border rounded-xl w-full my-3">
+      <h3 className="text-2xl font-bold text-yellow-400 text-center">
+        {message}
+      </h3>
     </div>
   );
 };

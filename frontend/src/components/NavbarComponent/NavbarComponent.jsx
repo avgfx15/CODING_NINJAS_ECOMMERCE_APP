@@ -26,6 +26,7 @@ import { userProfileState } from "../../redux/userRedux/userSlice";
 
 // | import user Actions
 import { getUserProfileByLoggedInUserAction } from "../../redux/userRedux/userActions";
+import ErrorComponent from "../ErrorComponent/ErrorComponent";
 
 // & Navbar Component
 const NavbarComponent = () => {
@@ -50,20 +51,8 @@ const NavbarComponent = () => {
   // # handle logout functionality
   const handleLogout = () => {
     dispatch(logoutUserAction());
-    navigate("/");
+    navigate("/signin");
   };
-
-  // / Get LoggedInUser Profile
-  useEffect(() => {
-    if (isUserLoggedIn && loggedInUser) {
-      console.log(loggedInUser);
-
-      dispatch(getUserProfileByLoggedInUserAction(loggedInUser));
-    } else {
-      dispatch(logoutUserAction());
-      navigate("/");
-    }
-  }, [dispatch, loggedInUser]);
 
   // ^ Navbar return render
   return (
@@ -295,7 +284,7 @@ const NavbarComponent = () => {
               >
                 <li className="">
                   <NavLink to="/profile" className="justify-between text-lg">
-                    {userProfile?.name}
+                    {loggedInUser?.username}
                   </NavLink>
                 </li>
                 <li>

@@ -112,7 +112,7 @@ export const authSignInController = async (req, res, next) => {
     res.cookie("authToken", token, {
       httpOnly: true,
       secure: false,
-      maxAge: 5 * 60 * 1000,
+      maxAge: 60 * 60 * 1000,
     });
 
     // $ Send response to client
@@ -123,7 +123,7 @@ export const authSignInController = async (req, res, next) => {
       token,
     });
   } catch (error) {
-    return next(error);
+    return next(new ErrorHandler(501, "Error to sign In User" + error.message));
   }
 };
 
@@ -142,6 +142,10 @@ export const authLogoutController = async (req, res, next) => {
       message: `User logged out successfully!!!`,
     });
   } catch (error) {
-    return next(error);
+    console.error("Logout Error:", error);
+    return res.status(500).json({
+      successStatus: false,
+      message: "An error occurred during logout.",
+    });
   }
 };

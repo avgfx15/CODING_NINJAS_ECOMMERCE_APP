@@ -16,24 +16,20 @@ import {
 import LoadingComponent from "../LoadingComponent/LoadingComponent";
 
 // | Importing isUserLoggedInState, loggedInUserState from AuthSlice
-import {
-  isUserLoggedInState,
-  loggedInUserState,
-} from "../../redux/authRedux/AuthSlice";
+import { authErrorState } from "../../redux/authRedux/AuthSlice";
+import ErrorComponent from "../ErrorComponent/ErrorComponent";
 
 // & AuthComponent
 const AuthComponent = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   // @ dispatch variable
   const dispatch = useDispatch();
 
   // @ useNavigate variable
   const navigate = useNavigate();
 
-  // @ isUserLoggedIn and loggedInUser variables
-  const isUserLoggedIn = useSelector(isUserLoggedInState);
-
-  // @ loggedInUser variable
-  const loggedInUser = useSelector(loggedInUserState);
+  // @ authError and authSuccessStatus variables
+  const authError = useSelector(authErrorState);
 
   // @ SignIn SignUp toggle
   const [isSignIn, setIsSignIn] = useState(true);
@@ -52,18 +48,31 @@ const AuthComponent = () => {
   };
 
   // # SignIn Form Submit
+
   const signInFormSubmit = async (e) => {
     e.preventDefault();
 
+    // @ Check if form data is not empty
+    if (!formData.email || !formData.password) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
     try {
-      if (!formData.email || !formData.password) {
-        return "Please Fill Out All Fields";
+      const result = await dispatch(signInUserAction(formData));
+
+      // @ check if result is a boolean
+      if (signInUserAction.rejected.match(result)) {
+        setErrorMessage(result.payload.message);
+        // ^ set error message
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
+      } else {
+        navigate("/");
       }
-      // $ Add API call or further processing here
-      dispatch(signInUserAction(formData));
-      navigate("/");
     } catch (error) {
-      console.log(error);
+      console.log("Login failed:", error.message);
     }
   };
 
@@ -110,6 +119,7 @@ const AuthComponent = () => {
           {/* Login Form Start  */}
 
           <div className="w-full md:w-1/2 p-4 rounded-box shadow-2xl space-x-4 ml-0 md:ml-4">
+            {errorMessage && <ErrorComponent message={errorMessage} />}
             <form onSubmit={signInFormSubmit}>
               <fieldset className="fieldset border border-base-400 p-4 rounded-box shadow-2xl">
                 <legend className="fieldset-legend text-2xl">Sign In</legend>

@@ -39,9 +39,9 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // ` axiosInterceptor logout action
-setupAxiosInterceptors(() => {
-  store.dispatch(logoutUserAction()); // Pass the logout action as a callback
-});
+// setupAxiosInterceptors(() => {
+//   store.dispatch(logoutUserAction()); // Pass the logout action as a callback
+// });
 
 // ` store Configure
 const store = configureStore({

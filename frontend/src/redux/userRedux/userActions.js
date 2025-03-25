@@ -32,6 +32,7 @@ export const getUserProfileByLoggedInUserAction = createAsyncThunk(
       const response = await axios.get(`${baseURL}/users/getprofile`, {
         withCredentials: true, // Ensure cookies are sent
       });
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

@@ -15,10 +15,14 @@ export const signInUserAction = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(`/auth/signin`, user);
-
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      if (error.response) {
+        // Return proper error messages
+        return rejectWithValue(error.response.data || "Invalid credentials");
+      } else {
+        return rejectWithValue("Network error. Please try again.");
+      }
     }
   }
 );
@@ -48,15 +52,13 @@ export const logoutUserAction = createAsyncThunk(
     console.log("delete user session");
     try {
       // Clear user session (e.g., remove token from localStorage)
-      // This is a placeholder, you should implement the actual logout logic
-      // For example, you might call an API endpoint to invalidate the user's session
-      const response = await axiosInstance.post("/auth/logout", {});
+      const response = await axiosInstance.post("/auth/logout");
       // Remove token from localStorage
-
       localStorage.removeItem("persist:root");
 
       return response.data;
     } catch (error) {
+      console.error("Logout API Error:", error);
       return rejectWithValue(error.response.data);
     }
   }
