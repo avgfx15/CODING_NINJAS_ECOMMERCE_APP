@@ -15,6 +15,7 @@ import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 
 const App = () => {
   const loggedInUser = useSelector(loggedInUserState);
+  console.log(loggedInUser);
 
   const theme = useSelector(selectTheme);
   useEffect(() => {

@@ -54,6 +54,13 @@ const NavbarComponent = () => {
     navigate("/signin");
   };
 
+  // / Get LoggedInUser Profile
+  useEffect(() => {
+    if (loggedInUser) {
+      dispatch(getUserProfileByLoggedInUserAction(loggedInUser));
+    }
+  }, [dispatch, loggedInUser]);
+
   // ^ Navbar return render
   return (
     <div className="navbar  shadow-sm mx-auto border-b border-purple-100 px-5">

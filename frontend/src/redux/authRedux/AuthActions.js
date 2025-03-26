@@ -2,7 +2,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // | import axios
-import axios from "axios";
+
 import { axiosInstance } from "../axiosInstance";
 
 // | import axiosInstance
@@ -35,10 +35,15 @@ export const signUpUserAction = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(`/auth/signup`, user);
-
+      console.log(response.data);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      if (error.response) {
+        console.log(error.response.data);
+        return rejectWithValue(error.response.data || "Sign Up error");
+      } else {
+        return rejectWithValue("Network error. Please try again.");
+      }
     }
   }
 );
@@ -53,8 +58,6 @@ export const logoutUserAction = createAsyncThunk(
     try {
       // Clear user session (e.g., remove token from localStorage)
       const response = await axiosInstance.post("/auth/logout");
-      // Remove token from localStorage
-      localStorage.removeItem("persist:root");
 
       return response.data;
     } catch (error) {

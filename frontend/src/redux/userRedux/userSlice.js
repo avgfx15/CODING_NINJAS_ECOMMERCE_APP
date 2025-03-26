@@ -33,6 +33,7 @@ const UserSlice = createSlice({
     builder.addCase(
       getUserProfileByLoggedInUserAction.fulfilled,
       (state, action) => {
+        console.log(action.payload);
         state.userProfileLoading = false;
         state.userProfileSuccessStatus = true;
         state.userProfile = action.payload.userProfile;

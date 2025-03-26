@@ -35,7 +35,12 @@ export const getUserProfileByLoggedInUserAction = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      if (error.response) {
+        // Return proper error messages
+        return rejectWithValue(error.response.data || "User Profile not found");
+      } else {
+        return rejectWithValue("Network error. Please try again.");
+      }
     }
   }
 );

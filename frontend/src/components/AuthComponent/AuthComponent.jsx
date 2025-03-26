@@ -54,8 +54,7 @@ const AuthComponent = () => {
 
     // @ Check if form data is not empty
     if (!formData.email || !formData.password) {
-      alert("Please fill out all fields.");
-      return;
+      return setErrorMessage("Please Fill Out All Fields");
     }
 
     try {
@@ -77,8 +76,13 @@ const AuthComponent = () => {
   };
 
   // # SignUp Form Submit
-  const signUpFormSubmit = (e) => {
+  const signUpFormSubmit = async (e) => {
     e.preventDefault();
+
+    // ^ set error message
+    setTimeout(() => {
+      setErrorMessage("");
+    }, 5000);
 
     try {
       if (
@@ -87,16 +91,22 @@ const AuthComponent = () => {
         !formData.password ||
         !formData.cPassword
       ) {
-        return "Please Fill Out All Fields";
+        return setErrorMessage("Please Fill Out All Fields");
       }
       // $ check if password and confirm password match
       if (formData.password !== formData.cPassword) {
-        return "Passwords do not match";
+        return setErrorMessage("Passwords do not match");
       }
 
       // $ Add API call or further processing here
-      dispatch(signUpUserAction(formData));
-      navigate("/singin");
+      const result = await dispatch(signUpUserAction(formData));
+      console.log(result);
+      // @ check if result is a boolean
+      if (signUpUserAction.rejected.match(result)) {
+        setErrorMessage(result.payload.message);
+      } else {
+        navigate("/signin");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -175,62 +185,64 @@ const AuthComponent = () => {
           {/* Sign Up Form Start  */}
 
           <div className="w-full md:w-1/2 p-4 rounded-box shadow-2xl space-x-4 ml-0 md:ml-4">
-            <fieldset className="fieldset border border-base-400 p-4 rounded-box shadow-2xl">
-              <legend className="fieldset-legend text-2xl">Sign Up</legend>
+            {errorMessage && <ErrorComponent message={errorMessage} />}
+            <form onSubmit={signUpFormSubmit}>
+              <fieldset className="fieldset border border-base-400 p-4 rounded-box shadow-2xl">
+                <legend className="fieldset-legend text-2xl">Sign Up</legend>
 
-              <label className="fieldset-label text-lg">Username</label>
-              <input
-                type="username"
-                name="username"
-                className="input w-full"
-                placeholder="Email"
-                onChange={handleChange}
-              />
+                <label className="fieldset-label text-lg">Username</label>
+                <input
+                  type="username"
+                  name="username"
+                  className="input w-full"
+                  placeholder="Email"
+                  onChange={handleChange}
+                />
 
-              <label className="fieldset-label text-lg">Email</label>
-              <input
-                type="email"
-                name="email"
-                onChange={handleChange}
-                className="input w-full"
-                placeholder="Email"
-              />
+                <label className="fieldset-label text-lg">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  className="input w-full"
+                  placeholder="Email"
+                />
 
-              <label className="fieldset-label text-lg">Password</label>
-              <input
-                type="password"
-                name="password"
-                onChange={handleChange}
-                className="input w-full"
-                placeholder="Password"
-              />
-              <label className="fieldset-label text-lg">Confirm Password</label>
-              <input
-                type="cPassword"
-                name="cPassword"
-                onChange={handleChange}
-                className="input w-full"
-                placeholder="Confirm Password"
-              />
+                <label className="fieldset-label text-lg">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  className="input w-full"
+                  placeholder="Password"
+                />
+                <label className="fieldset-label text-lg">
+                  Confirm Password
+                </label>
+                <input
+                  type="cPassword"
+                  name="cPassword"
+                  onChange={handleChange}
+                  className="input w-full"
+                  placeholder="Confirm Password"
+                />
 
-              <button
-                className="btn btn-neutral mt-4 text-xl"
-                onClick={(e) => signUpFormSubmit(e)}
-              >
-                Sign Up
-              </button>
-              <div className="flex items-center my-4">
-                <p className="text-lg mr-3">
-                  If already registered, please register here
-                </p>
-                <button
-                  className="btn btn-neutral"
-                  onClick={toggleSignInSignUp}
-                >
-                  Sign In
+                <button className="btn btn-neutral mt-4 text-xl" type="submit">
+                  Sign Up
                 </button>
-              </div>
-            </fieldset>
+                <div className="flex items-center my-4">
+                  <p className="text-lg mr-3">
+                    If already registered, please register here
+                  </p>
+                  <button
+                    className="btn btn-neutral"
+                    onClick={toggleSignInSignUp}
+                  >
+                    Sign In
+                  </button>
+                </div>
+              </fieldset>
+            </form>
           </div>
           {/* Sign Up Form End  */}
         </div>

@@ -52,18 +52,24 @@ const AuthSlice = createSlice({
     builder
       .addCase(signUpUserAction.pending, (state) => {
         state.authLoading = true;
+        state.authSuccessStatus = false;
+        state.authMessage = "";
+        state.authError = null; // Store error message
       })
       // / signUpUserAction
       .addCase(signUpUserAction.fulfilled, (state, action) => {
         state.authLoading = false;
         state.authSuccessStatus = action.payload.successStatus;
         state.authMessage = action.payload.message;
+        state.authError = null; // Store error message
       })
       // ! signUpUserAction
       .addCase(signUpUserAction.rejected, (state, action) => {
+        console.log(action.payload);
+
         state.authLoading = false;
         state.authSuccessStatus = false;
-        state.authMessage = action.payload.message;
+        state.authError = action.payload.message; // Store error message
       });
     // ? logOutUserAction
     builder.addCase(logoutUserAction.pending, (state) => {
