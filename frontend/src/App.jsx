@@ -9,13 +9,15 @@ import { selectTheme } from "./redux/themeSlice";
 import { useSelector } from "react-redux";
 import FooterComponent from "./components/FooterComponent/FooterComponent";
 import AuthComponent from "./components/AuthComponent/AuthComponent";
-import ProfileComponent from "./components/ProfileComponent/ProfileComponent";
+
 import { loggedInUserState } from "./redux/authRedux/AuthSlice";
 import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
+import { userProfileState } from "./redux/userRedux/userSlice";
+
+import DashboardPage from "./components/DashBoardComponents/deshboardPage";
 
 const App = () => {
   const loggedInUser = useSelector(loggedInUserState);
-  console.log(loggedInUser);
 
   const theme = useSelector(selectTheme);
   useEffect(() => {
@@ -28,7 +30,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomeComponent />} />
         {loggedInUser && (
-          <Route path="/profile" element={<ProfileComponent />} />
+          <>
+            <Route path="/dashboard" element={<DashboardPage />} />
+          </>
         )}
         <Route path="/signin" element={<AuthComponent />} />
         <Route path="/about" element={<h1 className="h-screen">About</h1>} />

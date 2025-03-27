@@ -38,6 +38,7 @@ export const signUpUserAction = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (error) {
+      console.log(error.response);
       if (error.response) {
         console.log(error.response.data);
         return rejectWithValue(error.response.data || "Sign Up error");

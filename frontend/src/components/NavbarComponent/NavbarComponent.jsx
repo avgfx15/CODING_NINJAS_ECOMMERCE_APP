@@ -279,7 +279,7 @@ const NavbarComponent = () => {
                     alt="user Profile"
                     src={
                       userProfile?.profileImage
-                        ? userProfile.profileImage
+                        ? userProfile?.profileImage
                         : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDXHyqEEcIEQzggUF5RIBe8g37M9n1guqKhg&s"
                     }
                   />
@@ -290,12 +290,12 @@ const NavbarComponent = () => {
                 className="menu menu-sm dropdown-content container2 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
                 <li className="">
-                  <NavLink to="/profile" className="justify-between text-lg">
+                  <NavLink to="/dashboard" className="justify-between text-lg">
                     {loggedInUser?.username}
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/profile" className="justify-between">
+                  <NavLink to="/dashboard" className="justify-between">
                     Profile
                     <span className="badge">New</span>
                   </NavLink>

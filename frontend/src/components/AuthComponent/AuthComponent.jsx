@@ -68,6 +68,7 @@ const AuthComponent = () => {
           setErrorMessage("");
         }, 5000);
       } else {
+        setFormData({});
         navigate("/");
       }
     } catch (error) {
@@ -105,7 +106,8 @@ const AuthComponent = () => {
       if (signUpUserAction.rejected.match(result)) {
         setErrorMessage(result.payload.message);
       } else {
-        navigate("/signin");
+        setFormData({});
+        setIsSignIn(true);
       }
     } catch (error) {
       console.log(error);

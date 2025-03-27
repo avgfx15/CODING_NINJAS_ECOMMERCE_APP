@@ -29,6 +29,7 @@ const UserSlice = createSlice({
       state.userProfileLoading = true;
       state.userProfileSuccessStatus = false;
       state.userProfileMessage = null;
+      state.userProfile = {};
     });
     builder.addCase(
       getUserProfileByLoggedInUserAction.fulfilled,
@@ -46,6 +47,7 @@ const UserSlice = createSlice({
         state.userProfileLoading = false;
         state.userProfileSuccessStatus = false;
         state.userProfileMessage = action.payload;
+        state.userProfile = {};
       }
     );
     // / logOutUserAction
