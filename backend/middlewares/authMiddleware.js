@@ -10,7 +10,7 @@ export const authMiddleware = async (req, res, next) => {
     const token = req.cookies.authToken;
     // $ If no token
     if (!token) {
-      return next(ErrorHandler(401, "Unauthorized: No token provided"));
+      return next(new ErrorHandler(401, "Unauthorized: No token provided"));
     }
     // @ Get User if token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

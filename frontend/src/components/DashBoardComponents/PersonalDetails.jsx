@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { userProfileState } from "../../redux/userRedux/userSlice";
+import InfoBox from "../../Utils/InfoBox";
 
 const PersonalDetails = () => {
   const userProfile = useSelector(userProfileState);
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center py-3">
       <div className="avatar">
         <div className="w-28 rounded-full">
           <img
@@ -20,63 +21,68 @@ const PersonalDetails = () => {
         </div>
       </div>
 
-      <h1 className="text-3xl font-bold my-3">{userProfile.name}</h1>
-      <div className="hero-content flex-col lg:flex-row w-11/12">
-        <div className="flex flex-col lg:flex-row items-center justify-between w-96">
-          <div className="w-1/2">
-            <p>
-              <span className="font-bold mr-3">Username : </span>
-              <span>{userProfile.userId.username}</span>
-            </p>
-            <p>
-              <span className="font-bold">Email : </span>
-              <span>{userProfile.userId.email}</span>
-            </p>
-            <p>
-              <span className="font-bold">Role : </span>
-              <span>{userProfile.userId.role}</span>
-            </p>
+      <h1 className="text-3xl font-bold my-3">{userProfile?.name}</h1>
+      <div className="hero-content flex-col lg:flex-row justify-center items-center w-11/12">
+        <div className="flex flex-col xl:flex-row flex-wrap justify-center xl:justify-around items-center w-full mx-auto">
+          <div className="w-10/12 xl:w-5/12 container2 mb-3 xl:mb-0">
+            <InfoBox
+              label="Username"
+              value={userProfile?.userId?.username}
+              placeholder="Mobile No not available"
+            />
+            <InfoBox
+              label="Email"
+              value={userProfile?.userId?.email}
+              placeholder="Mobile No not available"
+            />
+
+            <InfoBox
+              label="Role"
+              value={userProfile?.userId?.role}
+              placeholder="Mobile No not available"
+            />
           </div>
-          <div className="w-1/2">
-            <p>
-              <span className="font-bold">Mobile No : </span>
-              <span>{userProfile.mobile}</span>
-            </p>
-            <p>
-              <span className="font-bold">Age : </span>
-              <span>{userProfile.age} years</span>
-            </p>
-            <p>
-              <span className="font-bold">Gender : </span>
-              <span>{userProfile.gender}</span>
-            </p>
+          <div className="container2 w-10/12 xl:w-5/12">
+            <InfoBox
+              label="Mobile No"
+              value={userProfile?.mobile}
+              placeholder="Mobile No not available"
+            />
+            <InfoBox
+              label="Age"
+              value={userProfile?.age}
+              placeholder="Mobile No not available"
+            />
+            <InfoBox
+              label="Gender"
+              value={userProfile?.gender}
+              placeholder="Mobile No not available"
+            />
           </div>
         </div>
       </div>
-
-      <ul className="list container2 w-11/12 rounded-box shadow-md">
-        <li className="p-4 text-xl tracking-wide">Personal Details</li>
-        <li className="list-row">
-          <p>Address :</p>
-          <p>{userProfile.address.street}</p>
-          <button className="btn btn-square btn-ghost">Edit</button>
-        </li>
-        <li className="list-row">
-          <p>City :</p>
-          <p>{userProfile.address.city}</p>
-          <button className="btn btn-square btn-ghost">Edit</button>
-        </li>
-        <li className="list-row">
-          <p>State :</p>
-          <p>{userProfile.address.state}</p>
-          <button className="btn btn-square btn-ghost">Edit</button>
-        </li>
-        <li className="list-row">
-          <p>Country :</p>
-          <p>{userProfile.address.country}</p>
-          <button className="btn btn-square btn-ghost">Edit</button>
-        </li>
-      </ul>
+      <div className="container2 w-10/12 rounded-box shadow-md">
+        <InfoBox
+          label="Address"
+          value={userProfile?.address?.street}
+          placeholder="Mobile No not available"
+        />
+        <InfoBox
+          label="City"
+          value={userProfile?.address?.city}
+          placeholder="Mobile No not available"
+        />
+        <InfoBox
+          label="State"
+          value={userProfile?.address?.state}
+          placeholder="Mobile No not available"
+        />
+        <InfoBox
+          label="Country"
+          value={userProfile?.address?.country}
+          placeholder="Mobile No not available"
+        />
+      </div>
     </div>
   );
 };

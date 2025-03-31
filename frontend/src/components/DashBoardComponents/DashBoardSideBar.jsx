@@ -10,6 +10,8 @@ import {
   HiAnnotation,
   HiChartPie,
 } from "react-icons/hi";
+
+import { MdPersonalInjury } from "react-icons/md";
 import { HiDocumentText } from "react-icons/hi2";
 import { loggedInUserState } from "../../redux/authRedux/AuthSlice";
 import { logoutUserAction } from "../../redux/authRedux/AuthActions";
@@ -36,14 +38,14 @@ const DashBoardSideBar = () => {
 
   return (
     <div className="min-h-full">
-      <div className="drawer lg:drawer-open">
+      <div className="drawer xl:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
           {/* Page content here */}
 
           <label
             htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
+            className="btn btn-primary drawer-button xl:hidden"
           >
             Open drawer
           </label>
@@ -68,7 +70,7 @@ const DashBoardSideBar = () => {
               </div>
             </div>
             <h2 className="text-2xl font-bold text-center">
-              {userProfile.name}
+              {userProfile?.name}
             </h2>
             <li className="text-lg font-bold hover:bg-gray-600 hover:text-white rounded-xl hover:transition-all hover:duration-500 hover:ease-in-out transition-colors duration-500 ease-in-out">
               <Link to="/dashboard?tab=personaldetails">
@@ -79,7 +81,7 @@ const DashBoardSideBar = () => {
                   labelColor="dark"
                   as="div"
                 >
-                  <HiArrowSmRight /> Personal Details
+                  <MdPersonalInjury /> Personal Details
                 </div>
               </Link>
             </li>

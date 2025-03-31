@@ -7,7 +7,7 @@ import { logoutUserAction } from "../authRedux/AuthActions";
 // @ initialState variable
 const initialState = {
   // @ user object
-  userProfile: {},
+  userProfile: null,
   // @ loading boolean
   userProfileLoading: false,
   // @ error string
@@ -29,7 +29,7 @@ const UserSlice = createSlice({
       state.userProfileLoading = true;
       state.userProfileSuccessStatus = false;
       state.userProfileMessage = null;
-      state.userProfile = {};
+      state.userProfile = null;
     });
     builder.addCase(
       getUserProfileByLoggedInUserAction.fulfilled,
@@ -47,12 +47,12 @@ const UserSlice = createSlice({
         state.userProfileLoading = false;
         state.userProfileSuccessStatus = false;
         state.userProfileMessage = action.payload;
-        state.userProfile = {};
+        state.userProfile = null;
       }
     );
     // / logOutUserAction
     builder.addCase(logoutUserAction.fulfilled, (state, action) => {
-      state.userProfile = {};
+      state.userProfile = null;
       state.userProfileLoading = false;
       state.userProfileMessage = action.payload.message;
     });

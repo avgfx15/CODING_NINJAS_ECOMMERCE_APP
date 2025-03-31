@@ -112,7 +112,8 @@ export const authSignInController = async (req, res, next) => {
     res.cookie("authToken", token, {
       httpOnly: true,
       secure: false,
-      maxAge: 60 * 60 * 24 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: "Strict",
     });
 
     // $ Send response to client

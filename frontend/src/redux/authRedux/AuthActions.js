@@ -60,6 +60,10 @@ export const logoutUserAction = createAsyncThunk(
       // Clear user session (e.g., remove token from localStorage)
       const response = await axiosInstance.post("/auth/logout");
 
+      // Clear Redux Persist Data
+      await persistor.purge();
+      localStorage.removeItem("persist:root"); // Ensure Local Storage is cleared
+
       return response.data;
     } catch (error) {
       console.error("Logout API Error:", error);
