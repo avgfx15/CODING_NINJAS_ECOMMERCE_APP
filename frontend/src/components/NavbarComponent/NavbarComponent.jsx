@@ -49,8 +49,8 @@ const NavbarComponent = () => {
   const authLoading = useSelector(authLoadingState);
 
   // # handle logout functionality
-  const handleLogout = () => {
-    dispatch(logoutUserAction());
+  const handleLogout = async () => {
+    await dispatch(logoutUserAction());
     navigate("/signin");
   };
 

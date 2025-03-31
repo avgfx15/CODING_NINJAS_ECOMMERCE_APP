@@ -61,7 +61,7 @@ export const logoutUserAction = createAsyncThunk(
       const response = await axiosInstance.post("/auth/logout");
 
       // Clear Redux Persist Data
-      await persistor.purge();
+
       localStorage.removeItem("persist:root"); // Ensure Local Storage is cleared
 
       return response.data;

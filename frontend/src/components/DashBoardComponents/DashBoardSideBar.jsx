@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userProfileState } from "../../redux/userRedux/userSlice";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation } from "react-router"; // Import Link from react-router
 
 import {
   HiArrowSmRight,
@@ -12,6 +12,10 @@ import {
 } from "react-icons/hi";
 
 import { MdPersonalInjury } from "react-icons/md";
+import { TbSocial } from "react-icons/tb";
+import { PiStudentFill } from "react-icons/pi";
+import { FaSignOutAlt } from "react-icons/fa";
+
 import { HiDocumentText } from "react-icons/hi2";
 import { loggedInUserState } from "../../redux/authRedux/AuthSlice";
 import { logoutUserAction } from "../../redux/authRedux/AuthActions";
@@ -23,7 +27,6 @@ const DashBoardSideBar = () => {
 
   const loggedInUser = useSelector(loggedInUserState);
   const userProfile = useSelector(userProfileState);
-  console.log(userProfile);
 
   // # handle logout functionality
   const handleLogout = () => {
@@ -35,6 +38,12 @@ const DashBoardSideBar = () => {
     const tabFromUrl = urlParams.get("tab");
     setTab(tabFromUrl);
   }, [location.search]);
+
+  // Function to check if a link is active
+  const isActive = (path) => {
+    const currentPath = location.pathname + location.search;
+    return currentPath === path;
+  };
 
   return (
     <div className="min-h-full">
@@ -56,7 +65,7 @@ const DashBoardSideBar = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu container2 min-h-full w-60 p-4">
+          <ul className="menu container2 min-h-full w-60 p-3">
             {/* Sidebar content here */}
             <div className="avatar mx-auto mb-5">
               <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
@@ -72,70 +81,63 @@ const DashBoardSideBar = () => {
             <h2 className="text-2xl font-bold text-center">
               {userProfile?.name}
             </h2>
-            <li className="text-lg font-bold hover:bg-gray-600 hover:text-white rounded-xl hover:transition-all hover:duration-500 hover:ease-in-out transition-colors duration-500 ease-in-out">
-              <Link to="/dashboard?tab=personaldetails">
-                <div
-                  className="flex"
-                  active={tab === "personaldetails"}
-                  label={loggedInUser.isAdmin ? "Admin" : "User"}
-                  labelColor="dark"
-                  as="div"
-                >
-                  <MdPersonalInjury /> Personal Details
-                </div>
+            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
+              <Link
+                to="/dashboard?tab=personaldetails"
+                className={`flex items-center gap-2 hover:bg-gray-600 hover:text-white hover:transition-all hover:duration-500 hover:ease-in-out p-2 ${
+                  isActive("/dashboard?tab=personaldetails")
+                    ? "bg-gray-600 text-white"
+                    : ""
+                }`}
+              >
+                <MdPersonalInjury /> Personal Info
               </Link>
             </li>
-            <li className="text-lg font-bold hover:bg-gray-600 hover:text-white rounded-xl hover:transition-all hover:duration-500 hover:ease-in-out transition-colors duration-500 ease-in-out">
-              <Link to="/dashboard?tab=socialmedia">
-                <div
-                  active={tab === "socialmedia"}
-                  icon={HiUser}
-                  label={loggedInUser.isAdmin ? "Admin" : "User"}
-                  labelColor="dark"
-                  as="div"
-                >
-                  Social Media
-                </div>
+            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
+              <Link
+                to="/dashboard?tab=socialmedia"
+                className={`flex items-center gap-2 hover:bg-gray-600 hover:text-white hover:transition-all hover:duration-500 hover:ease-in-out p-2 ${
+                  isActive("/dashboard?tab=socialmedia")
+                    ? "bg-gray-600 text-white"
+                    : ""
+                }`}
+              >
+                <TbSocial /> Social Media Info
               </Link>
             </li>
-            <li className="text-lg font-bold hover:bg-gray-600 hover:text-white rounded-xl hover:transition-all hover:duration-500 hover:ease-in-out transition-colors duration-500 ease-in-out">
-              <Link to="/dashboard?tab=professionaldetails">
-                <div
-                  active={tab === "professionaldetails"}
-                  icon={HiUser}
-                  label={loggedInUser.isAdmin ? "Admin" : "User"}
-                  labelColor="dark"
-                  as="div"
-                >
-                  Professional Details
-                </div>
+            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
+              <Link
+                to="/dashboard?tab=professionaldetails"
+                className={`flex items-center gap-2 hover:bg-gray-600 hover:text-white hover:transition-all hover:duration-500 hover:ease-in-out p-2 ${
+                  isActive("/dashboard?tab=professionaldetails")
+                    ? "bg-gray-600 text-white"
+                    : ""
+                }`}
+              >
+                <HiDocumentText /> Professional Info
               </Link>
             </li>
-            <li className="text-lg font-bold hover:bg-gray-600 hover:text-white rounded-xl hover:transition-all hover:duration-500 hover:ease-in-out transition-colors duration-500 ease-in-out">
-              <Link to="/dashboard?tab=educationdetails">
-                <div
-                  active={tab === "educationdetails"}
-                  icon={HiUser}
-                  label={loggedInUser.isAdmin ? "Admin" : "User"}
-                  labelColor="dark"
-                  as="div"
-                >
-                  Education Details
-                </div>
+            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
+              <Link
+                to="/dashboard?tab=educationdetails"
+                className={`flex items-center gap-2 hover:bg-gray-600 hover:text-white hover:transition-all hover:duration-500 hover:ease-in-out p-2 ${
+                  isActive("/dashboard?tab=educationdetails")
+                    ? "bg-gray-600 text-white"
+                    : ""
+                }`}
+              >
+                <PiStudentFill />
+                Education Info
               </Link>
             </li>
 
             <li className="text-lg font-bold hover:bg-gray-600 hover:text-white rounded-xl hover:transition-all hover:duration-500 hover:ease-in-out transition-colors duration-500 ease-in-out">
-              <Link to="/">
-                <div
-                  icon={HiArrowSmRight}
-                  className="cursor-pointer"
-                  onClick={handleLogout}
-                  labelColor="dark"
-                  as="div"
-                >
-                  Sign Out
-                </div>
+              <Link
+                to="/"
+                className="flex items-center gap-2 cursor-pointer p-2"
+                onClick={handleLogout}
+              >
+                <FaSignOutAlt /> Sign Out
               </Link>
             </li>
           </ul>

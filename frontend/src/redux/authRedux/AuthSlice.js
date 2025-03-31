@@ -82,7 +82,6 @@ const AuthSlice = createSlice({
       state.loggedInUser = null;
       state.authMessage = action.payload.message;
       state.authSuccessStatus = action.payload.successStatus;
-      return initialState;
     });
     // ! logOutUserAction
     builder.addCase(logoutUserAction.rejected, (state, action) => {
