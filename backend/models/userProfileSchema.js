@@ -6,13 +6,11 @@ const userProfileSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
       unique: true,
       index: true,
     },
     mobile: {
       type: String,
-      required: true,
       unique: true,
     },
     age: {
@@ -20,7 +18,7 @@ const userProfileSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      default: ["Male", "Female", "Transgender"],
+      default: ["Male", "Female", "Other"],
     },
     address: {
       street: { type: String, default: "" },

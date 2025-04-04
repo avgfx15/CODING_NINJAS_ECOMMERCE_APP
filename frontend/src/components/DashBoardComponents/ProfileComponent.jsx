@@ -3,14 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { userProfileState } from "../../redux/userRedux/userSlice";
 import { Link, useLocation } from "react-router";
 
-import {
-  HiArrowSmRight,
-  HiUser,
-  HiUserGroup,
-  HiAnnotation,
-  HiChartPie,
-} from "react-icons/hi";
-import { HiDocumentText } from "react-icons/hi2";
+import { HiArrowSmRight, HiUser } from "react-icons/hi";
+
 import { loggedInUserState } from "../../redux/authRedux/AuthSlice";
 import { logoutUserAction } from "../../redux/authRedux/AuthActions";
 

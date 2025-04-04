@@ -46,7 +46,7 @@ const DashBoardSideBar = () => {
   };
 
   return (
-    <div className="min-h-full">
+    <div className="h-lvh">
       <div className="drawer xl:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
@@ -65,7 +65,7 @@ const DashBoardSideBar = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu container2 min-h-full w-60 p-3">
+          <ul className="menu container2 h-lvh w-60 p-3">
             {/* Sidebar content here */}
             <div className="avatar mx-auto mb-5">
               <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">

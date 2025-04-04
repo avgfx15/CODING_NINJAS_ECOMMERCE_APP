@@ -31,13 +31,31 @@ export const addUserProfileController = async (req, res, next) => {
     }
 
     // @ get data from req.body
-    const { name, mobile, age, gender, address, location, profileImage } =
-      req.body;
+    const {
+      name,
+      mobile,
+      age,
+      gender,
+      street,
+      city,
+      state,
+      zip,
+      country,
+      profileImage,
+    } = req.body;
 
     // % name & mobile must required
     if (!name || !mobile) {
       return next(new ErrorHandler(401, "Name & mobile must required"));
     }
+
+    const address = {
+      street,
+      city,
+      state,
+      zip,
+      country,
+    };
 
     // + Create userProfile & save to DB
     const userProfile = new UserProfileModel({
@@ -55,7 +73,7 @@ export const addUserProfileController = async (req, res, next) => {
 
     return res.status(201).json({
       message: `${userProfile.name} profile saved in database.`,
-      user: profileSaved,
+      userProfile: profileSaved,
       successStatus: true,
     });
   } catch (error) {
@@ -78,7 +96,7 @@ export const getUserProfileController = async (req, res, next) => {
 
     // %  You are not authorized
     if (!profileExist) {
-      return next(new ErrorHandler(401, "You are not authorized"));
+      return next(new ErrorHandler(401, "Profile does not exist"));
     }
     return res.status(200).json({
       successStatus: true,

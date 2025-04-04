@@ -131,7 +131,6 @@ export const authSignInController = async (req, res, next) => {
 // + User SignOut
 export const authLogoutController = async (req, res, next) => {
   try {
-    console.log("logout");
     // $ Send response to client
     // $ Remove Cookie
     await res.clearCookie("authToken", {

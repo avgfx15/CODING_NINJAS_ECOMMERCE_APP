@@ -35,12 +35,10 @@ export const signUpUserAction = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(`/auth/signup`, user);
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
-      console.log(error.response);
       if (error.response) {
-        console.log(error.response.data);
         return rejectWithValue(error.response.data || "Sign Up error");
       } else {
         return rejectWithValue("Network error. Please try again.");

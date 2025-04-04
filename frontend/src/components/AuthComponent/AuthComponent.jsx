@@ -101,7 +101,7 @@ const AuthComponent = () => {
 
       // $ Add API call or further processing here
       const result = await dispatch(signUpUserAction(formData));
-      console.log(result);
+
       // @ check if result is a boolean
       if (signUpUserAction.rejected.match(result)) {
         setErrorMessage(result.payload.message);

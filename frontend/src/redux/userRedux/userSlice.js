@@ -1,17 +1,25 @@
 // | import createSlice
 
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserProfileByLoggedInUserAction } from "./userActions";
+import {
+  addUserProfileAction,
+  getUserProfileByLoggedInUserAction,
+} from "./userActions";
 import { logoutUserAction } from "../authRedux/AuthActions";
 
 // @ initialState variable
 const initialState = {
+  // @ get all User Profile
+  allUserProfile: null,
   // @ user object
   userProfile: null,
   // @ loading boolean
   userProfileLoading: false,
-  // @ error string
+  // @ message state
   userProfileMessage: null,
+  // @ error message
+  userProfileError: null,
+  // @ success boolean
   userProfileSuccessStatus: false,
 };
 
@@ -25,12 +33,16 @@ const UserSlice = createSlice({
   reducers: {},
   // @ extraReducers
   extraReducers: (builder) => {
+    // / Get User Profile By LoggedInUser
+    // & pending
     builder.addCase(getUserProfileByLoggedInUserAction.pending, (state) => {
       state.userProfileLoading = true;
       state.userProfileSuccessStatus = false;
       state.userProfileMessage = null;
       state.userProfile = null;
+      state.userProfileError = null;
     });
+    // & fulfilled
     builder.addCase(
       getUserProfileByLoggedInUserAction.fulfilled,
       (state, action) => {
@@ -39,17 +51,46 @@ const UserSlice = createSlice({
         state.userProfileSuccessStatus = true;
         state.userProfile = action.payload.userProfile;
         state.userProfileMessage = action.payload.message;
+        state.userProfileError = null;
       }
     );
+    // ! rejected
     builder.addCase(
       getUserProfileByLoggedInUserAction.rejected,
       (state, action) => {
         state.userProfileLoading = false;
         state.userProfileSuccessStatus = false;
-        state.userProfileMessage = action.payload;
+        state.userProfileMessage = null;
+        state.userProfileError = action.payload.message;
         state.userProfile = null;
       }
     );
+    // + addUserProfileAction
+    // & pending
+    builder.addCase(addUserProfileAction.pending, (state) => {
+      state.userProfileLoading = true;
+      state.userProfileSuccessStatus = false;
+      state.userProfileMessage = null;
+      state.userProfile = null;
+      state.userProfileError = null;
+    });
+    // & fulfilled
+    builder.addCase(addUserProfileAction.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.userProfileLoading = false;
+      state.userProfileError = null;
+      state.userProfileSuccessStatus = true;
+      state.userProfile = action.payload.userProfile;
+      state.userProfileMessage = action.payload.message;
+    });
+    // ! rejected
+    builder.addCase(addUserProfileAction.rejected, (state, action) => {
+      state.userProfileLoading = false;
+      state.userProfileSuccessStatus = false;
+      state.userProfileMessage = null;
+      state.userProfileError = action.payload.message;
+      state.userProfile = null;
+    });
     // / logOutUserAction
     builder.addCase(logoutUserAction.fulfilled, (state, action) => {
       state.userProfile = null;
@@ -74,6 +115,10 @@ export const userProfileLoadingState = (state) =>
 // ~ export userProfileMessage State
 export const userProfileMessageState = (state) =>
   state.UserReducers?.userProfileMessage;
+
+// ~ export userProfileError State
+export const userProfileErrorState = (state) =>
+  state.UserReducers?.userProfileError;
 
 // ~ export userProfileSuccessStatus State
 export const userProfileSuccessStatusState = (state) =>
