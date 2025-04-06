@@ -11,7 +11,7 @@ import {
   HiChartPie,
 } from "react-icons/hi";
 
-import { MdPersonalInjury } from "react-icons/md";
+import { MdDelete, MdPersonalInjury } from "react-icons/md";
 import { TbSocial } from "react-icons/tb";
 import { PiStudentFill } from "react-icons/pi";
 import { FaSignOutAlt } from "react-icons/fa";
@@ -30,6 +30,12 @@ const DashBoardSideBar = () => {
 
   // # handle logout functionality
   const handleLogout = () => {
+    dispatch(logoutUserAction());
+  };
+
+  // - Handle delete account functionality
+  const handleDeleteAccount = () => {
+    console.log("Handle delete account");
     dispatch(logoutUserAction());
   };
 
@@ -128,6 +134,16 @@ const DashBoardSideBar = () => {
               >
                 <PiStudentFill />
                 Education Info
+              </Link>
+            </li>
+            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
+              <Link
+                to="/"
+                className="flex items-center gap-2 cursor-pointer p-2"
+                onClick={handleDeleteAccount}
+              >
+                <MdDelete />
+                Delete My Account
               </Link>
             </li>
 
