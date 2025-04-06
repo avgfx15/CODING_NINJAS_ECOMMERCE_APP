@@ -53,7 +53,6 @@ export const signUpUserAction = createAsyncThunk(
 export const logoutUserAction = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
-    console.log("delete user session");
     try {
       // Clear user session (e.g., remove token from localStorage)
       const response = await axiosInstance.post("/auth/logout");

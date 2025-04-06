@@ -7,6 +7,7 @@ import UserProfileModel from "../models/userProfileSchema.js";
 
 import { authMiddleware } from "../middlewares/authMiddleware.js"; //
 import { ErrorHandler } from "../middlewares/errorHandler.js";
+import { redis } from "../config/redisCache.js";
 
 const uploadRouter = express.Router();
 
@@ -29,6 +30,16 @@ uploadRouter.post(
   upload.single("profileImage"),
   async (req, res, next) => {
     try {
+      // ^ Get Profile By Id
+      const key = generateCacheKey(req);
+
+      const checkKeys = await redis.keys(key);
+
+      // ^ If Data exist in Cache
+      if (checkKeys.length > 0) {
+        await redis.del("uploadedprofilepic");
+        await redis.del(key);
+      }
       const loggedInUser = req.user;
 
       if (!req.file) {

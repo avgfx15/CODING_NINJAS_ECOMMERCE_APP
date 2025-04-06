@@ -57,7 +57,6 @@ const NavbarComponent = () => {
   // / Get LoggedInUser Profile
   useEffect(() => {
     if (loggedInUser) {
-      console.log("get User Profile");
       dispatch(getUserProfileByLoggedInUserAction(loggedInUser));
     }
   }, [dispatch, loggedInUser]);

@@ -36,6 +36,9 @@ const PersonalDetails = () => {
   // @ state for isEditName boolean
   const [isEditName, setIsEditName] = useState(false);
 
+  // @ state for inputData
+  const [inputData, setInputData] = useState({});
+
   // @ state for input value
   const [inputValue, setInputValue] = useState("");
 
@@ -94,7 +97,7 @@ const PersonalDetails = () => {
   // % Handle input change
   const handleChange = (e) => {
     setInputValue(e.target.value);
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
   // % Handle form submission
@@ -107,6 +110,20 @@ const PersonalDetails = () => {
     }, 5000);
 
     try {
+      console.log(inputData);
+      const result = dispatch(updateUserProfileAction(inputData));
+      console.log(result.payload);
+      // @ check if result is a boolean
+      if (updateUserProfileAction.rejected.match(result)) {
+        setErrorMessage(result.payload.message);
+      }
+      // ^ If result is not a boolean, it means the action was successful
+      else {
+        setErrorMessage("");
+        setInputValue(""); // Clear the input value after submission
+        setInputData({}); // Clear the input data after submission
+        setRefreshTrigger((prev) => !prev); // Refresh profile in parent component
+      }
     } catch (error) {
       console.error("Error updating name:", error);
     }
@@ -265,22 +282,22 @@ const PersonalDetails = () => {
           </div>
           <div className="container2 w-10/12 rounded-box shadow-md">
             <InfoBox
-              label="Address"
+              label="address.street"
               initialValue={userProfile?.address?.street}
               placeholder="Address not available"
             />
             <InfoBox
-              label="City"
+              label="address.City"
               initialValue={userProfile?.address?.city}
               placeholder="City not available"
             />
             <InfoBox
-              label="State"
+              label="address.State"
               initialValue={userProfile?.address?.state}
               placeholder="State not available"
             />
             <InfoBox
-              label="Country"
+              label="address.Country"
               initialValue={userProfile?.address?.country}
               placeholder="Country not available"
             />

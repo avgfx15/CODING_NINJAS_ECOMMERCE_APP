@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   addUserProfileAction,
   getUserProfileByLoggedInUserAction,
+  updateUserProfileAction,
   uploadImageAction,
 } from "./userActions";
 import { logoutUserAction } from "../authRedux/AuthActions";
@@ -49,7 +50,6 @@ const UserSlice = createSlice({
     builder.addCase(
       getUserProfileByLoggedInUserAction.fulfilled,
       (state, action) => {
-        console.log(action.payload);
         state.userProfileLoading = false;
         state.userProfileSuccessStatus = true;
         state.userProfile = action.payload.userProfile;
@@ -121,6 +121,32 @@ const UserSlice = createSlice({
       state.userProfileError = action.payload.message;
       state.userProfile = null;
     });
+    // * Update User Profile
+    // & pending
+    builder.addCase(updateUserProfileAction.pending, (state) => {
+      state.userProfileLoading = true;
+      state.userProfileSuccessStatus = false;
+      state.userProfileMessage = null;
+      state.userProfileError = null;
+      state.userProfile = null;
+    });
+    // & fulfilled
+    builder.addCase(updateUserProfileAction.fulfilled, (state, action) => {
+      state.userProfileLoading = false;
+      state.userProfileSuccessStatus = true;
+      state.userProfileMessage = action.payload.message;
+      state.userProfileError = null;
+      state.userProfile = action.payload.userProfile; // Assuming the updated user profile is returned
+    });
+    // ! rejected
+    builder.addCase(updateUserProfileAction.rejected, (state, action) => {
+      state.userProfileLoading = false;
+      state.userProfileSuccessStatus = false;
+      state.userProfileMessage = null;
+      state.userProfileError = action.payload.message;
+      state.userProfile = null;
+    });
+
     // / logOutUserAction
     builder.addCase(logoutUserAction.fulfilled, (state, action) => {
       state.userProfile = null;

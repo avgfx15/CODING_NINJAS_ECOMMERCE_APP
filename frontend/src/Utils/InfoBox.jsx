@@ -1,31 +1,61 @@
 import React, { useState } from "react";
 
 import { FaEdit, FaSave } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { updateUserProfileAction } from "../redux/userRedux/userActions";
 
+// ^ InfoBox Main Component
 const InfoBox = ({ label, initialValue, placeholder }) => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({});
 
   const [inputValue, setInputValue] = useState(initialValue || "");
   const [isEditing, setIsEditing] = useState(false);
 
-  // Handle input change
+  // @ errorMessage state
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // $ Handle input change
   const handleChange = (e) => {
     setInputValue(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
+  // % Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(inputValue);
-    console.log(formData);
-    setIsEditing(false); // Exit editing mode
+    // ^ set error message
+    setTimeout(() => {
+      setErrorMessage("");
+    }, 5000);
+
+    try {
+      const result = dispatch(updateUserProfileAction(formData));
+      // @ check if result is a boolean
+      if (updateUserProfileAction.rejected.match(result)) {
+        setErrorMessage(result.payload.message);
+      }
+      // ^ If result is not a boolean, it means the action was successful
+      else {
+        setIsEditing(false); // Exit edit mode
+        setErrorMessage(""); // Clear error message
+        setInputValue(""); // Clear the input value after submission
+        setFormData({}); // Clear the input data after submission
+      }
+    } catch (error) {
+      console.error("Error updating name:", error);
+      setErrorMessage(
+        "Failed to update name. Please try again." + " -- " + error.message
+      );
+    }
   };
 
   return (
     <div className="flex flex-col lg:flex-row justify-between items-center w-full mb-3 p-2">
       {/* Label */}
+      {errorMessage && <ErrorComponent message={errorMessage} />}
       <div className="lg:w-3/12">
         <label className="font-semibold">{label}</label>
       </div>

@@ -149,6 +149,7 @@ export const getAllUsersUserProfileController = async (req, res, next) => {
 // / Get User Profile By Id By Admin User
 export const getUserProfileByIdController = async (req, res, next) => {
   try {
+    console.log("Get user profile by Id controller");
     // @ loggedInUser variable
     const loggedInUser = req.user;
 
@@ -207,7 +208,7 @@ export const updateUserProfileController = async (req, res, next) => {
 
     // ^ If Data exist in Cache
     if (checkKeys.length > 0) {
-      await redis.del("getallusersprofile");
+      await redis.del("updateUserProfile");
       await redis.del(key);
     }
 
