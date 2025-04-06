@@ -95,12 +95,12 @@ const PersonalDetails = () => {
     }
   };
 
-  // % Handle input change
+  // % Handle name input change
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  // % Handle form submission
+  // % Handle form submission for name change
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -109,14 +109,13 @@ const PersonalDetails = () => {
       setErrorMessage("");
     }, 5000);
 
-    const inputData = {
+    const changeName = {
       name: inputValue,
     };
 
     try {
-      console.log(inputData);
-      const result = dispatch(updateUserProfileAction(inputData));
-      console.log(result.payload);
+      const result = dispatch(updateUserProfileAction(changeName));
+
       // @ check if result is a boolean
       if (updateUserProfileAction.rejected.match(result)) {
         setErrorMessage(result.payload.message);
@@ -129,7 +128,9 @@ const PersonalDetails = () => {
         setRefreshTrigger((prev) => !prev); // Refresh profile in parent component
       }
     } catch (error) {
-      console.error("Error updating name:", error);
+      setErrorMessage(
+        "Failed to update name. Please try again." + " -- " + error.message
+      );
     }
     // $ Exit editing mode
     setIsEditName(false);

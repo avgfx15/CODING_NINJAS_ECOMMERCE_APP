@@ -45,7 +45,6 @@ const InfoBox = ({ label, initialValue, placeholder }) => {
         setFormData({}); // Clear the input data after submission
       }
     } catch (error) {
-      console.error("Error updating name:", error);
       setErrorMessage(
         "Failed to update name. Please try again." + " -- " + error.message
       );
