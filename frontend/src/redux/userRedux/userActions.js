@@ -50,3 +50,34 @@ export const getUserProfileByLoggedInUserAction = createAsyncThunk(
     }
   }
 );
+
+// + Upload Image
+export const uploadImageAction = createAsyncThunk(
+  "uploadImage",
+  async ({ formData, setUploadProgress }, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(
+        `/upload/profilepic`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true, // Ensure cookies are sent
+          onUploadProgress: (progressEvent) => {
+            const percent = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(percent);
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data || "Upload error");
+      } else {
+        return rejectWithValue("Network error. Please try again.");
+      }
+    }
+  }
+);

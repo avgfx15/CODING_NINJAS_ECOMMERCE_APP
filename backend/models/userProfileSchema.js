@@ -31,9 +31,8 @@ const userProfileSchema = new mongoose.Schema(
       type: String,
     },
     profileImage: {
-      type: String,
-      default:
-        "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg",
+      url: String,
+      public_id: String,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

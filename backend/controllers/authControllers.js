@@ -72,14 +72,23 @@ export const authSignInController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const userExist = await UserModel.findOne({ email }).select("+password");
+    // # Check whether input is an email or a username
+    const isEmail = email.includes("@");
 
+    // # userExist check
+    const userExist = await UserModel.findOne(
+      isEmail ? { email: email } : { username: email }
+    ).select("+password");
+
+    // $ if user not exist
     if (!userExist) {
       return next(new ErrorHandler(401, "User not exists"));
     }
 
+    // $ compare password with hash password
     const isMatched = await bcrypt.compareSync(password, userExist.password);
 
+    // $ if password not matched
     if (!isMatched) {
       return next(new ErrorHandler(401, "Invalid Credentials"));
     }

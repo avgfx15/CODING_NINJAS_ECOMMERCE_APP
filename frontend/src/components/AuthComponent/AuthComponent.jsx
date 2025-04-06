@@ -138,11 +138,11 @@ const AuthComponent = () => {
 
                 <label className="fieldset-label text-lg">Email</label>
                 <input
-                  type="email"
+                  type="text"
                   name="email"
                   onChange={handleChange}
                   className="input w-full"
-                  placeholder="Email"
+                  placeholder="Login Details"
                 />
 
                 <label className="fieldset-label text-lg">Password</label>

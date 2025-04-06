@@ -71,8 +71,8 @@ const DashBoardSideBar = () => {
               <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
                 <img
                   src={
-                    userProfile?.profileImage
-                      ? userProfile.profileImage
+                    userProfile?.profileImage?.url
+                      ? userProfile.profileImage?.url
                       : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDXHyqEEcIEQzggUF5RIBe8g37M9n1guqKhg&s"
                   }
                 />

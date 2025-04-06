@@ -279,8 +279,8 @@ const NavbarComponent = () => {
                   <img
                     alt="user Profile"
                     src={
-                      userProfile?.profileImage
-                        ? userProfile?.profileImage
+                      userProfile?.profileImage?.url
+                        ? userProfile?.profileImage?.url
                         : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDXHyqEEcIEQzggUF5RIBe8g37M9n1guqKhg&s"
                     }
                   />
