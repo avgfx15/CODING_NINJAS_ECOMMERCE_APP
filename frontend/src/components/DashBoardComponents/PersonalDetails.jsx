@@ -16,6 +16,7 @@ import { FaEdit, FaSave } from "react-icons/fa";
 import AddPersonalProfileComponent from "./AddPersonalProfileComponent";
 import {
   getUserProfileByLoggedInUserAction,
+  updateUserProfileAction,
   uploadImageAction,
 } from "../../redux/userRedux/userActions";
 
@@ -97,7 +98,6 @@ const PersonalDetails = () => {
   // % Handle input change
   const handleChange = (e) => {
     setInputValue(e.target.value);
-    setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
   // % Handle form submission
@@ -108,6 +108,10 @@ const PersonalDetails = () => {
     setTimeout(() => {
       setErrorMessage("");
     }, 5000);
+
+    const inputData = {
+      name: inputValue,
+    };
 
     try {
       console.log(inputData);
