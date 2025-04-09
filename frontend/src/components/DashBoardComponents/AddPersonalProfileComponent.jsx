@@ -49,7 +49,7 @@ const AddPersonalProfileComponent = () => {
         setRefreshTrigger((prev) => !prev); // Refresh profile in parent component
       }
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(userProfileErrorMessage + " -- " + error.message);
     }
   };
   // & render Component

@@ -27,6 +27,7 @@ import { userProfileState } from "../../redux/userRedux/userSlice";
 // | import user Actions
 import { getUserProfileByLoggedInUserAction } from "../../redux/userRedux/userActions";
 import ErrorComponent from "../ErrorComponent/ErrorComponent";
+import { getUserSocialMediaAction } from "../../redux/socialMediaRedux/socialMediaAction";
 
 // & Navbar Component
 const NavbarComponent = () => {
@@ -58,6 +59,7 @@ const NavbarComponent = () => {
   useEffect(() => {
     if (loggedInUser) {
       dispatch(getUserProfileByLoggedInUserAction(loggedInUser));
+      dispatch(getUserSocialMediaAction());
     }
   }, [dispatch, loggedInUser]);
 

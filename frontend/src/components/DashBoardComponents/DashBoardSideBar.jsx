@@ -52,108 +52,105 @@ const DashBoardSideBar = () => {
   };
 
   return (
-    <div className="h-lvh">
-      <div className="drawer xl:drawer-open">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
-          {/* Page content here */}
-
-          <label
-            htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button xl:hidden"
-          >
-            Open drawer
-          </label>
+    <div className="w-full">
+      {/* Mobile Top Menu */}
+      <div className="block container2 p-4 shadow-md">
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-bold">{userProfile?.name}</h2>
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link to="/dashboard?tab=personaldetails">
+                  <MdPersonalInjury /> Personal Info
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard?tab=socialmedia">
+                  <TbSocial /> Social Media Info
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard?tab=professionaldetails">
+                  <HiDocumentText /> Professional Info
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard?tab=educationdetails">
+                  <PiStudentFill /> Education Info
+                </Link>
+              </li>
+              <li>
+                <Link to="/" onClick={handleLogout}>
+                  <FaSignOutAlt /> Logout
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
+
+      {/* Drawer Sidebar for Desktop */}
+      <div className="hidden xl:block drawer drawer-open w-72">
         <div className="drawer-side">
-          <label
-            htmlFor="my-drawer-2"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <ul className="menu container2 h-lvh w-60 p-3">
-            {/* Sidebar content here */}
+          <ul className="menu p-4 w-full min-h-screen bg-base-200 text-base-content">
+            {/* Avatar + Name */}
             <div className="avatar mx-auto mb-5">
-              <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
+              <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                 <img
                   src={
-                    userProfile?.profileImage?.url
-                      ? userProfile.profileImage?.url
-                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDXHyqEEcIEQzggUF5RIBe8g37M9n1guqKhg&s"
+                    userProfile?.profileImage?.url ||
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDXHyqEEcIEQzggUF5RIBe8g37M9n1guqKhg&s"
                   }
                 />
               </div>
             </div>
-            <h2 className="text-2xl font-bold text-center">
+            <h2 className="text-2xl font-bold text-center mb-5">
               {userProfile?.name}
             </h2>
-            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
-              <Link
-                to="/dashboard?tab=personaldetails"
-                className={`flex items-center gap-2 hover:bg-gray-600 hover:text-white hover:transition-all hover:duration-500 hover:ease-in-out p-2 ${
-                  isActive("/dashboard?tab=personaldetails")
-                    ? "bg-gray-600 text-white"
-                    : ""
-                }`}
-              >
+
+            {/* Sidebar Menu */}
+            <li>
+              <Link to="/dashboard?tab=personaldetails">
                 <MdPersonalInjury /> Personal Info
               </Link>
             </li>
-            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
-              <Link
-                to="/dashboard?tab=socialmedia"
-                className={`flex items-center gap-2 hover:bg-gray-600 hover:text-white hover:transition-all hover:duration-500 hover:ease-in-out p-2 ${
-                  isActive("/dashboard?tab=socialmedia")
-                    ? "bg-gray-600 text-white"
-                    : ""
-                }`}
-              >
+            <li>
+              <Link to="/dashboard?tab=socialmedia">
                 <TbSocial /> Social Media Info
               </Link>
             </li>
-            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
-              <Link
-                to="/dashboard?tab=professionaldetails"
-                className={`flex items-center gap-2 hover:bg-gray-600 hover:text-white hover:transition-all hover:duration-500 hover:ease-in-out p-2 ${
-                  isActive("/dashboard?tab=professionaldetails")
-                    ? "bg-gray-600 text-white"
-                    : ""
-                }`}
-              >
+            <li>
+              <Link to="/dashboard?tab=professionaldetails">
                 <HiDocumentText /> Professional Info
               </Link>
             </li>
-            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
-              <Link
-                to="/dashboard?tab=educationdetails"
-                className={`flex items-center gap-2 hover:bg-gray-600 hover:text-white hover:transition-all hover:duration-500 hover:ease-in-out p-2 ${
-                  isActive("/dashboard?tab=educationdetails")
-                    ? "bg-gray-600 text-white"
-                    : ""
-                }`}
-              >
-                <PiStudentFill />
-                Education Info
+            <li>
+              <Link to="/dashboard?tab=educationdetails">
+                <PiStudentFill /> Education Info
               </Link>
             </li>
-            <li className="text-lg font-bold rounded-xl transition-colors duration-500 ease-in-out">
-              <Link
-                to="/"
-                className="flex items-center gap-2 cursor-pointer p-2"
-                onClick={handleDeleteAccount}
-              >
-                <MdDelete />
-                Delete My Account
-              </Link>
-            </li>
-
-            <li className="text-lg font-bold hover:bg-gray-600 hover:text-white rounded-xl hover:transition-all hover:duration-500 hover:ease-in-out transition-colors duration-500 ease-in-out">
-              <Link
-                to="/"
-                className="flex items-center gap-2 cursor-pointer p-2"
-                onClick={handleLogout}
-              >
-                <FaSignOutAlt /> Sign Out
+            <li>
+              <Link to="/" onClick={handleLogout}>
+                <FaSignOutAlt /> Logout
               </Link>
             </li>
           </ul>

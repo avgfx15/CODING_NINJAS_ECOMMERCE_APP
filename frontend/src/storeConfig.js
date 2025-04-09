@@ -6,12 +6,14 @@ import storage from "redux-persist/lib/storage";
 import AuthReducer from "./redux/authRedux/AuthSlice";
 import ThemeReducer from "./redux/themeSlice";
 import UserReducers from "./redux/userRedux/userSlice";
+import socialMediaReducers from "./redux/socialMediaRedux/socialMediaSlice";
 
 // Root Reducer
 const rootReducer = combineReducers({
   ThemeReducer,
   AuthReducer,
   UserReducers,
+  socialMediaReducers,
 });
 
 // Persist Config

@@ -20,13 +20,12 @@ import {
   uploadImageAction,
 } from "../../redux/userRedux/userActions";
 
-import axios from "axios";
-
 // ^ Personal Details Component
 const PersonalDetails = () => {
   // @ dispatch variable
   const dispatch = useDispatch();
 
+  // @ state variable for image, preview, uploading and uploading progress
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -36,9 +35,6 @@ const PersonalDetails = () => {
   const [refreshTrigger, setRefreshTrigger] = useState(false);
   // @ state for isEditName boolean
   const [isEditName, setIsEditName] = useState(false);
-
-  // @ state for inputData
-  const [inputData, setInputData] = useState({});
 
   // @ state for input value
   const [inputValue, setInputValue] = useState("");
@@ -86,7 +82,6 @@ const PersonalDetails = () => {
         setPreview(null); // Clear the preview after upload
       }
     } catch (error) {
-      console.log(error.message);
       setErrorMessage(error.message);
       alert("Upload failed!");
     } finally {
@@ -124,7 +119,6 @@ const PersonalDetails = () => {
       else {
         setErrorMessage("");
         setInputValue(""); // Clear the input value after submission
-        setInputData({}); // Clear the input data after submission
         setRefreshTrigger((prev) => !prev); // Refresh profile in parent component
       }
     } catch (error) {
@@ -145,7 +139,7 @@ const PersonalDetails = () => {
 
   // & Component Render
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center py-3">
+    <div className="h-fit w-full flex flex-col items-center justify-center py-5">
       {errorMessage && <ErrorComponent message={errorMessage} />}
 
       <div className="relative flex flex-col items-center">

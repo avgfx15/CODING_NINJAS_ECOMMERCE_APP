@@ -28,6 +28,7 @@ import { errorLog, successLog } from "./utils/consoleLog.js";
 // | import error Handler Middleware
 import { errorHandlerMiddleware } from "./middlewares/errorHandler.js";
 import uploadRouter from "./routes/uploadRoutes.js";
+import socialMediaRouter from "./routes/socialMediaRoutes.js";
 
 // ` Middleware configure
 app.use(express.json());
@@ -49,6 +50,8 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 // ` Configure route for the upload URL
 app.use("/api/v1/upload", uploadRouter);
+// ^ Social Media Router
+app.use("/api/v1/social", socialMediaRouter);
 
 // ` Configure error handler globally
 app.use(errorHandlerMiddleware);
