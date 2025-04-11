@@ -13,8 +13,7 @@ import AuthComponent from "./components/AuthComponent/AuthComponent";
 import { loggedInUserState } from "./redux/authRedux/AuthSlice";
 import ErrorComponent from "./components/ErrorComponent/ErrorComponent";
 import { userProfileState } from "./redux/userRedux/userSlice";
-
-import DashboardPage from "./components/DashBoardComponents/deshboardPage";
+import DashboardPage from "./components/DashBoardComponents/DeshboardPage";
 
 const App = () => {
   const loggedInUser = useSelector(loggedInUserState);
@@ -25,23 +24,25 @@ const App = () => {
   }, [theme]);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full min-h-screen flex flex-col">
       <NavbarComponent />
-      <Routes>
-        <Route path="/" element={<HomeComponent />} />
-        {loggedInUser && (
-          <>
-            <Route path="/dashboard" element={<DashboardPage />} />
-          </>
-        )}
-        <Route path="/signin" element={<AuthComponent />} />
-        <Route path="/about" element={<h1 className="h-screen">About</h1>} />
-        <Route
-          path="/contactus"
-          element={<h1 className="h-screen">Contact Us</h1>}
-        />
-        <Route path="*" element={<ErrorComponent />} />
-      </Routes>
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<HomeComponent />} />
+          {loggedInUser && (
+            <>
+              <Route path="/dashboard" element={<DashboardPage />} />
+            </>
+          )}
+          <Route path="/signin" element={<AuthComponent />} />
+          <Route path="/about" element={<h1 className="h-screen">About</h1>} />
+          <Route
+            path="/contactus"
+            element={<h1 className="h-screen">Contact Us</h1>}
+          />
+          <Route path="*" element={<ErrorComponent />} />
+        </Routes>
+      </main>
       <FooterComponent />
     </div>
   );

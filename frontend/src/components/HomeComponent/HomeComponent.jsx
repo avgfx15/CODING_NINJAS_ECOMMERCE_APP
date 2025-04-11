@@ -6,7 +6,7 @@ import { getUserProfileByLoggedInUserAction } from "../../redux/userRedux/userAc
 
 const HomeComponent = () => {
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
       <CarouselComponent />
     </div>
   );

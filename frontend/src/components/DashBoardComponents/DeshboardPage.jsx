@@ -18,16 +18,16 @@ const DashboardPage = () => {
   }, [location.search]);
 
   return (
-    <div className="flex flex-col md:flex-row h-lvh">
-      <div className="h-lvh md:w-fit">
-        <DashBoardSideBar />
-      </div>
+    <div className="flex flex-row min-h-screen">
+      <DashBoardSideBar />
 
-      {/* {tab === "dashboard" && <DashBoardComponent />} */}
-      {tab === "personaldetails" && <PersonalDetails />}
-      {tab === "socialmedia" && <SocialMedia />}
-      {tab === "professionaldetails" && <ProfessionalDetails />}
-      {tab === "educationdetails" && <EducationalDetails />}
+      <div className="flex-1 p-7 w-full">
+        {/* {tab === "dashboard" && <DashBoardComponent />} */}
+        {tab === "personaldetails" && <PersonalDetails />}
+        {tab === "socialmedia" && <SocialMedia />}
+        {tab === "professionaldetails" && <ProfessionalDetails />}
+        {tab === "educationdetails" && <EducationalDetails />}
+      </div>
     </div>
   );
 };

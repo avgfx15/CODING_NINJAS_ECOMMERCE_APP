@@ -26,7 +26,7 @@ const SocialMedia = () => {
 
   // @ get current state of user social media data
   const userSocialMediaData = useSelector(userSocialMediaDataState);
-  console.log(userSocialMediaData);
+
   // @ get current state of user profile
   const userProfile = useSelector(userProfileState);
 
@@ -49,6 +49,17 @@ const SocialMedia = () => {
     "Pinterest",
     "Dribbble",
   ];
+  const existingPlatforms = Array.isArray(userSocialMediaData?.socialLinks)
+    ? userSocialMediaData?.socialLinks.map((p) => p.platform).filter(Boolean) // remove undefined/null if any
+    : [];
+
+  console.log("Existing Platforms:", existingPlatforms);
+  // Get remaining platforms not yet added
+  const remainingPlatforms = allPlatforms.filter(
+    (platform) => !existingPlatforms.includes(platform)
+  );
+
+  console.log("Remaining Platforms to Add:", remainingPlatforms);
 
   // + Add More Social Media Account
   const addMoreLink = () => {
@@ -72,13 +83,7 @@ const SocialMedia = () => {
   // # Handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(socialLinks);
-    const socialLinksMap = {};
-    // socialLinks.forEach((link) => {
-    //   if (link.platform && link.url) {
-    //     socialLinksMap[link.platform.toLowerCase()] = link.url;
-    //   }
-    // });
+
     try {
       const result = await dispatch(addUserSocialMediaAction(socialLinks));
       if (addUserSocialMediaAction.rejected.match(result)) {
@@ -91,7 +96,7 @@ const SocialMedia = () => {
 
   // & render component
   return (
-    <div className="w-11/12 rounded-box shadow-md m-5 min-h-screen">
+    <div className="rounded-box min-h-screen">
       <h1 className="text-3xl font-bold m-3 text-center">
         Social Media Details
       </h1>
@@ -106,7 +111,7 @@ const SocialMedia = () => {
               onChange={(e) => handleChange(index, "platform", e.target.value)}
             >
               <option value="">Select platform</option>
-              {allPlatforms
+              {remainingPlatforms
                 .filter(
                   (platform) =>
                     !socialLinks.some(
@@ -136,14 +141,18 @@ const SocialMedia = () => {
             </button>
           </div>
         ))}
+        <div className="flex my-3">
+          <button
+            className="btn btn-outline btn-primary mr-3"
+            onClick={addMoreLink}
+          >
+            Add Social Link
+          </button>
 
-        <button className="btn btn-outline btn-primary" onClick={addMoreLink}>
-          Add Social Link
-        </button>
-
-        <button className="btn btn-success mt-4" onClick={handleSubmit}>
-          Save Social Links
-        </button>
+          <button className="btn btn-success" onClick={handleSubmit}>
+            Save Social Links
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -25,12 +25,12 @@ import { userProfileState } from "../../redux/userRedux/userSlice";
 const iconMap = {
   facebook: FaFacebookSquare,
   instagram: FaInstagram,
-  linkedIn: FaLinkedin,
+  linkedin: FaLinkedin,
   twitter: FaTwitterSquare,
-  gitHub: FaGithubSquare,
-  youTube: FaYoutubeSquare,
+  github: FaGithubSquare,
+  youtube: FaYoutubeSquare,
   website: FaGlobe,
-  whatsApp: FaWhatsappSquare,
+  whatsapp: FaWhatsappSquare,
   pinterest: FaPinterestSquare,
   snapchat: FaSnapchatSquare,
   telegram: FaTelegramPlane,
@@ -44,14 +44,9 @@ const SocialMediaListComponent = () => {
 
   // @ get current state of user social media data
   const userSocialMediaData = useSelector(userSocialMediaDataState);
-  console.log(userSocialMediaData);
+
   const socialLinks = userSocialMediaData?.socialLinks;
-  console.log(socialLinks);
-  console.log(
-    socialLinks?.map((Links, url, index) => {
-      console.log(Links.platform);
-    })
-  );
+
   // @ get current state of user profile
   const userProfile = useSelector(userProfileState);
 
@@ -67,7 +62,7 @@ const SocialMediaListComponent = () => {
               target="_blank"
               className="flex flex-col items-center justify-center"
             >
-              <Icon className="text-3xl mb-2" />
+              <Icon className="text-5xl m-3" />
               <h2 className="text-xl font-semibold mb-2">
                 {socialMedia.platform}
               </h2>
