@@ -292,12 +292,18 @@ const NavbarComponent = () => {
                 className="menu menu-sm dropdown-content container2 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
                 <li className="">
-                  <NavLink to="/dashboard" className="justify-between text-lg">
+                  <NavLink
+                    to="/dashboard?tab=personaldetails"
+                    className="justify-between text-lg"
+                  >
                     {loggedInUser?.username}
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard" className="justify-between">
+                  <NavLink
+                    to="/dashboard?tab=personaldetails"
+                    className="justify-between"
+                  >
                     Profile
                     <span className="badge">New</span>
                   </NavLink>

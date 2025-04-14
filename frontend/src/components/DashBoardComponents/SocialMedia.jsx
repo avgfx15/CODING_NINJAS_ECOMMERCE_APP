@@ -150,8 +150,8 @@ const SocialMedia = () => {
               onChange={(e) => handleChange(index, "platform", e.target.value)}
             >
               <option value="">Select platform</option>
-              {getFilteredPlatforms(index).map((platform, index) => (
-                <option key={index} value={platform}>
+              {getFilteredPlatforms(index).map((platform, ind) => (
+                <option key={ind} value={platform}>
                   {platform.charAt(0).toUpperCase() + platform.slice(1)}
                 </option>
               ))}

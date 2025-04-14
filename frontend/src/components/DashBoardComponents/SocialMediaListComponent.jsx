@@ -38,6 +38,23 @@ const iconMap = {
   dribbble: FaDribbbleSquare,
 };
 
+const colorMap = {
+  facebook: "#1877F2", // Facebook blue
+  instagram: "#E1306C", // Instagram gradient
+  linkedin: "#0077B5", // LinkedIn blue
+  twitter: "#1DA1F2", // Twitter blue
+  github: "#fff ", // GitHub black
+  youtube: "#FF0000", // YouTube red
+  website: "#000", // Default black
+  whatsapp: "#25D366", // WhatsApp green
+  pinterest: "#E60023", // Pinterest red
+  snapchat: "#FFFC00", // Snapchat yellow
+  telegram: "#0088CC", // Telegram blue
+  tiktok: "#fff", // TikTok cyan
+  dribbble: "#EA4C92", // Dribbble pink
+};
+
+// ^ Social Media List Component
 const SocialMediaListComponent = () => {
   // @ get current state of logged in user
   const loggedInUser = useSelector(loggedInUserState);
@@ -56,13 +73,16 @@ const SocialMediaListComponent = () => {
         const Icon = iconMap[socialMedia.platform.toLowerCase()] || FaGlobe;
 
         return (
-          <div key={index} className="">
+          <div key={index} className="w-36 p-2">
             <Link
               to={socialMedia.url}
               target="_blank"
-              className="flex flex-col items-center justify-center"
+              className="flex flex-col flex-wrap items-center justify-center"
             >
-              <Icon className="text-5xl m-3" />
+              <Icon
+                className="text-5xl m-3"
+                style={{ color: colorMap[socialMedia.platform.toLowerCase()] }}
+              />
               <h2 className="text-xl font-semibold mb-2">
                 {socialMedia.platform}
               </h2>
