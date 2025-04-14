@@ -21,6 +21,9 @@ const SocialMedia = () => {
   // @ errorMessage
   const [errorMessage, setErrorMessage] = useState("");
 
+  // @ Edit or Add Mode
+  const [mode, setMode] = useState("add");
+
   // @ get current state of logged in user
   const loggedInUser = useSelector(loggedInUserState);
 
@@ -49,27 +52,62 @@ const SocialMedia = () => {
     "Pinterest",
     "Dribbble",
   ];
-  const existingPlatforms = Array.isArray(userSocialMediaData?.socialLinks)
-    ? userSocialMediaData?.socialLinks.map((p) => p.platform).filter(Boolean) // remove undefined/null if any
+
+  // # Get existing platforms from userSocialMediaData
+  const existingLinks = Array.isArray(userSocialMediaData?.socialLinks)
+    ? userSocialMediaData.socialLinks
     : [];
 
-  console.log("Existing Platforms:", existingPlatforms);
-  // Get remaining platforms not yet added
+  const existingPlatforms = existingLinks.map((p) => p.platform);
+
+  // # Get remaining platforms not yet added
   const remainingPlatforms = allPlatforms.filter(
     (platform) => !existingPlatforms.includes(platform)
   );
 
-  console.log("Remaining Platforms to Add:", remainingPlatforms);
+  const getFilteredPlatforms = (index) => {
+    const currentPlatform = socialLinks[index].platform;
+    return [
+      currentPlatform,
+      ...remainingPlatforms.filter(
+        (platform) =>
+          !socialLinks.some((l, i) => l.platform === platform && i !== index)
+      ),
+    ].filter(Boolean); // remove undefined/null
+  };
+
+  // # handle mode switch
+  const handleModeSwitch = (selectedMode) => {
+    setMode(selectedMode);
+
+    if (selectedMode === "update") {
+      setSocialLinks(existingLinks); // Prefill with current entries
+    } else {
+      setSocialLinks([{ platform: "", url: "" }]); // Reset for new adds
+    }
+  };
 
   // + Add More Social Media Account
   const addMoreLink = () => {
     setSocialLinks([...socialLinks, { platform: "", url: "" }]);
   };
 
+  // // * Update Existing Social Media Account
+  // const updateExistingLink = () => {
+  //   const updatedLinks = socialLinks.map((link) => {
+  //     const existing = userSocialMediaData?.socialLinks.find(
+  //       (l) => l.platform === link.platform
+  //     );
+  //     return existing ? { ...link, url: existing.url } : link;
+  //   });
+  //   setSocialLinks(updatedLinks);
+  // };
+
   // # handle change
   const handleChange = (index, field, value) => {
-    const updatedLinks = [...socialLinks];
-    updatedLinks[index][field] = value;
+    const updatedLinks = socialLinks.map((link, i) =>
+      i === index ? { ...link, [field]: value } : link
+    );
     setSocialLinks(updatedLinks);
   };
 
@@ -89,6 +127,7 @@ const SocialMedia = () => {
       if (addUserSocialMediaAction.rejected.match(result)) {
         console.log(result.error.data);
       }
+      setSocialLinks([{ platform: "", url: "" }]);
     } catch (error) {
       return console.error(error);
     }
@@ -111,18 +150,11 @@ const SocialMedia = () => {
               onChange={(e) => handleChange(index, "platform", e.target.value)}
             >
               <option value="">Select platform</option>
-              {remainingPlatforms
-                .filter(
-                  (platform) =>
-                    !socialLinks.some(
-                      (l, i) => l.platform === platform && i !== index
-                    )
-                )
-                .map((platform) => (
-                  <option key={platform} value={platform}>
-                    {platform.charAt(0).toUpperCase() + platform.slice(1)}
-                  </option>
-                ))}
+              {getFilteredPlatforms(index).map((platform, index) => (
+                <option key={index} value={platform}>
+                  {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                </option>
+              ))}
             </select>
 
             <input
@@ -141,16 +173,23 @@ const SocialMedia = () => {
             </button>
           </div>
         ))}
-        <div className="flex my-3">
+        <div className="flex my-3 gap-3">
           <button
-            className="btn btn-outline btn-primary mr-3"
-            onClick={addMoreLink}
+            className={`btn ${mode === "add" ? "btn-primary" : "btn-outline"}`}
+            onClick={() => handleModeSwitch("add")}
           >
-            Add Social Link
+            Add New Link
           </button>
-
-          <button className="btn btn-success" onClick={handleSubmit}>
-            Save Social Links
+          <button
+            className={`btn ${
+              mode === "update" ? "btn-success" : "btn-outline"
+            }`}
+            onClick={() => handleModeSwitch("update")}
+          >
+            Update Existing
+          </button>
+          <button className="btn btn-accent" onClick={handleSubmit}>
+            Save
           </button>
         </div>
       </div>

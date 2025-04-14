@@ -18,12 +18,38 @@ export const addSocialMediaController = async (req, res, next) => {
       return next(new ErrorHandler(401, "User does note exist"));
     }
 
+    const existing = await SocialMediaModel.findOne({
+      userId: loggedInUser.id,
+    });
+
+    let updatedLinks;
+
+    if (existing) {
+      // Convert to map for easier merging
+      const existingMap = {};
+      existing.socialLinks.forEach(({ platform, url }) => {
+        existingMap[platform] = url;
+      });
+
+      // Replace or add new values from incoming data
+      socialMediaData.forEach(({ platform, url }) => {
+        existingMap[platform] = url;
+      });
+
+      // Convert back to array of objects
+      updatedLinks = Object.entries(existingMap).map(([platform, url]) => ({
+        platform,
+        url,
+      }));
+    } else {
+      updatedLinks = socialMediaData; // First-time save
+    }
     // + Create or Update social media document
 
     const userSocialMediaConnection = await SocialMediaModel.findOneAndUpdate(
       { userId: loggedInUser.id },
-      { $set: { socialLinks: socialMediaData } },
-      { new: true, upsert: true } // this creates if not exists
+      { $set: { socialLinks: updatedLinks } },
+      { new: true, upsert: true }
     );
 
     res.json({
