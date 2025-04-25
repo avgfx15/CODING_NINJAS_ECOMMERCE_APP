@@ -34,7 +34,7 @@ export const addUserProfileAction = createAsyncThunk(
         "/users/addprofile",
         userProfile
       );
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
       console.log(error.response.data);

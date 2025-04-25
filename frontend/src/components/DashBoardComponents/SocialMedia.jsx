@@ -3,7 +3,10 @@ import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { addUserSocialMediaAction } from "../../redux/socialMediaRedux/socialMediaAction";
+import {
+  addUserSocialMediaAction,
+  deleteUserSocialMediaAction,
+} from "../../redux/socialMediaRedux/socialMediaAction";
 
 import { loggedInUserState } from "../../redux/authRedux/AuthSlice";
 
@@ -59,12 +62,13 @@ const SocialMedia = () => {
     : [];
 
   const existingPlatforms = existingLinks.map((p) => p.platform);
+  console.log(existingPlatforms + " existing platforms");
 
   // # Get remaining platforms not yet added
   const remainingPlatforms = allPlatforms.filter(
     (platform) => !existingPlatforms.includes(platform)
   );
-
+  console.log(remainingPlatforms + " remaining platforms");
   const getFilteredPlatforms = (index) => {
     const currentPlatform = socialLinks[index].platform;
     return [
@@ -75,6 +79,7 @@ const SocialMedia = () => {
       ),
     ].filter(Boolean); // remove undefined/null
   };
+  console.log(getFilteredPlatforms(0) + " filtered platforms");
 
   // # handle mode switch
   const handleModeSwitch = (selectedMode) => {
@@ -87,22 +92,6 @@ const SocialMedia = () => {
     }
   };
 
-  // + Add More Social Media Account
-  const addMoreLink = () => {
-    setSocialLinks([...socialLinks, { platform: "", url: "" }]);
-  };
-
-  // // * Update Existing Social Media Account
-  // const updateExistingLink = () => {
-  //   const updatedLinks = socialLinks.map((link) => {
-  //     const existing = userSocialMediaData?.socialLinks.find(
-  //       (l) => l.platform === link.platform
-  //     );
-  //     return existing ? { ...link, url: existing.url } : link;
-  //   });
-  //   setSocialLinks(updatedLinks);
-  // };
-
   // # handle change
   const handleChange = (index, field, value) => {
     const updatedLinks = socialLinks.map((link, i) =>
@@ -112,10 +101,11 @@ const SocialMedia = () => {
   };
 
   // - Handle Remove Social Media Account
-  const handleRemove = (index) => {
-    const updated = [...socialLinks];
-    updated.splice(index, 1);
-    setSocialLinks(updated);
+  const handleRemove = (platform) => {
+    dispatch(deleteUserSocialMediaAction(platform));
+    setSocialLinks((prevLinks) =>
+      prevLinks.filter((link) => link.platform !== platform)
+    );
   };
 
   // # Handle Submit
@@ -125,7 +115,7 @@ const SocialMedia = () => {
     try {
       const result = await dispatch(addUserSocialMediaAction(socialLinks));
       if (addUserSocialMediaAction.rejected.match(result)) {
-        console.log(result.error.data);
+        setErrorMessage(result.error.data);
       }
       setSocialLinks([{ platform: "", url: "" }]);
     } catch (error) {
@@ -167,19 +157,26 @@ const SocialMedia = () => {
 
             <button
               className="btn btn-error"
-              onClick={() => handleRemove(index)}
+              onClick={() => handleRemove(link.platform)}
             >
               Remove
             </button>
           </div>
         ))}
         <div className="flex my-3 gap-3">
-          <button
-            className={`btn ${mode === "add" ? "btn-primary" : "btn-outline"}`}
-            onClick={() => handleModeSwitch("add")}
-          >
-            Add New Link
-          </button>
+          {
+            /* Add new link button only if in add mode and there are remaining platforms */
+            remainingPlatforms.length > 0 && (
+              <button
+                className={`btn ${
+                  mode === "add" ? "btn-primary" : "btn-outline"
+                }`}
+                onClick={() => handleModeSwitch("add")}
+              >
+                Add New Link
+              </button>
+            )
+          }
           <button
             className={`btn ${
               mode === "update" ? "btn-success" : "btn-outline"

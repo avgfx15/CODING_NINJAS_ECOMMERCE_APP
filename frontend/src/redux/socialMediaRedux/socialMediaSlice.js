@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addUserSocialMediaAction,
+  deleteUserSocialMediaAction,
   getUserSocialMediaAction,
 } from "./socialMediaAction";
 
@@ -57,6 +58,30 @@ const socialMediaSlice = createSlice({
       state.socialMediaError = null;
     });
     builder.addCase(addUserSocialMediaAction.rejected, (state, action) => {
+      state.socialMediaLoading = false;
+      state.socialMediaSuccessStatus = false;
+      state.userSocialMediaData = null;
+      state.socialMediaMessage = null;
+      state.socialMediaError = action.payload.message;
+    });
+
+    // - Delete User Social Media Data
+    builder.addCase(deleteUserSocialMediaAction.pending, (state) => {
+      state.socialMediaLoading = true;
+      state.socialMediaSuccessStatus = false;
+      state.socialMediaMessage = null;
+      state.userSocialMediaData = null;
+      state.socialMediaError = null;
+    });
+    builder.addCase(deleteUserSocialMediaAction.fulfilled, (state, action) => {
+      state.socialMediaLoading = false;
+      state.socialMediaSuccessStatus = true;
+      state.userSocialMediaData = action.payload.socialMediaDetails;
+      state.socialMediaMessage = action.payload.message;
+      state.socialMediaError = null;
+    });
+    // # if delete action is rejected
+    builder.addCase(deleteUserSocialMediaAction.rejected, (state, action) => {
       state.socialMediaLoading = false;
       state.socialMediaSuccessStatus = false;
       state.userSocialMediaData = null;

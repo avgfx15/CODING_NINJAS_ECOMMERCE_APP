@@ -20,13 +20,34 @@ export const getUserSocialMediaAction = createAsyncThunk(
   }
 );
 
+// + Add User Social Media Action
 export const addUserSocialMediaAction = createAsyncThunk(
   "addUserSocialMedia",
   async (socialMediaData, { rejectWithValue }) => {
     try {
-      console.log(socialMediaData);
       const response = await axiosInstance.put("/social/addsocialmedia", {
         socialMediaData,
+      });
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue(error.response.data || "Social Media error");
+      } else {
+        return rejectWithValue("Network error. Please try again.");
+      }
+    }
+  }
+);
+
+// - Delete User Social Media Action
+export const deleteUserSocialMediaAction = createAsyncThunk(
+  "deleteUserSocialMedia",
+  async (platformsToDelete, { rejectWithValue }) => {
+    try {
+      console.log(platformsToDelete + " platform to delete");
+      const response = await axiosInstance.delete(`/social/deletesocialmedia`, {
+        data: { platformsToDelete }, // ✅ wrap it inside data
+        withCredentials: true,
       });
       return response.data;
     } catch (error) {
