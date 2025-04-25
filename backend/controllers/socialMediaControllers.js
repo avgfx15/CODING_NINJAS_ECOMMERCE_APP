@@ -126,7 +126,6 @@ export const deleteSocialMediaController = async (req, res, next) => {
   try {
     const { platformsToDelete } = req.body;
 
-    console.log(platformsToDelete + " backend platforms to delete");
     // @ Get LoggedInUser Data
     const loggedInUser = req.user;
 

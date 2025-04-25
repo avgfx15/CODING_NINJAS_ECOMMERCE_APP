@@ -62,13 +62,12 @@ const SocialMedia = () => {
     : [];
 
   const existingPlatforms = existingLinks.map((p) => p.platform);
-  console.log(existingPlatforms + " existing platforms");
 
   // # Get remaining platforms not yet added
   const remainingPlatforms = allPlatforms.filter(
     (platform) => !existingPlatforms.includes(platform)
   );
-  console.log(remainingPlatforms + " remaining platforms");
+
   const getFilteredPlatforms = (index) => {
     const currentPlatform = socialLinks[index].platform;
     return [

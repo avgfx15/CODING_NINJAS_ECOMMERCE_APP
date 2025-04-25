@@ -44,7 +44,6 @@ export const deleteUserSocialMediaAction = createAsyncThunk(
   "deleteUserSocialMedia",
   async (platformsToDelete, { rejectWithValue }) => {
     try {
-      console.log(platformsToDelete + " platform to delete");
       const response = await axiosInstance.delete(`/social/deletesocialmedia`, {
         data: { platformsToDelete }, // ✅ wrap it inside data
         withCredentials: true,
