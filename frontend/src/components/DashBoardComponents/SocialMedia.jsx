@@ -78,7 +78,6 @@ const SocialMedia = () => {
       ),
     ].filter(Boolean); // remove undefined/null
   };
-  console.log(getFilteredPlatforms(0) + " filtered platforms");
 
   // # handle mode switch
   const handleModeSwitch = (selectedMode) => {

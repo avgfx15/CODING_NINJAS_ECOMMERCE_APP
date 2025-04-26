@@ -7,6 +7,7 @@ import AuthReducer from "./redux/authRedux/AuthSlice";
 import ThemeReducer from "./redux/themeSlice";
 import UserReducers from "./redux/userRedux/userSlice";
 import socialMediaReducers from "./redux/socialMediaRedux/socialMediaSlice";
+import ProfessionalDataReducer from "./redux/professionalDetailsRedux/ProfessionalDetailsSlice";
 
 // Root Reducer
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   AuthReducer,
   UserReducers,
   socialMediaReducers,
+  ProfessionalDataReducer,
 });
 
 // Persist Config

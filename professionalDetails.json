@@ -1,0 +1,584 @@
+[
+    {
+        "userId": "6617c1e923b7e4c2f8030114",
+        "experiences": [
+            {
+                "title": "Software Engineer",
+                "company": "Tech Innovations",
+                "location": "New York, USA",
+                "employmentType": "Full-time",
+                "startDate": "2021-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Developed and maintained web applications using React and Node.js.",
+                "technologiesUsed": [
+                    "React",
+                    "Node.js",
+                    "MongoDB"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "JavaScript",
+                "level": "Expert"
+            },
+            {
+                "name": "React",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "Spanish",
+                "proficiency": "Conversational"
+            }
+        ],
+        "achievements": [
+            "Developed a full-stack application that increased user engagement by 30%",
+            "Led a team of 5 developers to successfully deliver a project ahead of schedule"
+        ]
+    },
+    {
+        "userId": "6617c1e923b7e4c2f8030115",
+        "experiences": [
+            {
+                "title": "Data Scientist",
+                "company": "Data Insights",
+                "location": "San Francisco, USA",
+                "employmentType": "Internship",
+                "startDate": "2022-06-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Analyzed data sets to extract insights and build predictive models.",
+                "technologiesUsed": [
+                    "Python",
+                    "Pandas",
+                    "Scikit-learn"
+                ]
+            },
+            {
+                "title": "Data Analyst",
+                "company": "Data Insights",
+                "location": "Remote",
+                "employmentType": "Internship",
+                "startDate": "2022-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Analyzed data sets to extract insights and build reports.",
+                "technologiesUsed": [
+                    "SQL",
+                    "Excel"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "Python",
+                "level": "Expert"
+            },
+            {
+                "name": "Machine Learning",
+                "level": "Advanced"
+            },
+            {
+                "name": "Data Analysis",
+                "level": "Advanced"
+            },
+            {
+                "name": "SQL",
+                "level": "Advanced"
+            },
+            {
+                "name": "Excel",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "French",
+                "proficiency": "Conversational"
+            },
+            {
+                "name": "Spanish",
+                "proficiency": "Conversational"
+            }
+        ],
+        "achievements": [
+            "Built a machine learning model that improved prediction accuracy by 20%",
+            "Presented findings at a national data science conference"
+        ]
+    },
+    {
+        "userId": "6617c1e923b7e4c2f8030116",
+        "experiences": [
+            {
+                "title": "UI/UX Designer",
+                "company": "Creative Studio",
+                "location": "Los Angeles, USA",
+                "employmentType": "Freelance",
+                "startDate": "2020-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Designed user interfaces and conducted user research.",
+                "technologiesUsed": [
+                    "Figma",
+                    "Adobe XD"
+                ]
+            },
+            {
+                "title": "Graphic Designer",
+                "company": "Design Agency",
+                "location": "Remote",
+                "employmentType": "Part-time",
+                "startDate": "2019-06-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Created graphics for marketing materials and social media.",
+                "technologiesUsed": [
+                    "Photoshop",
+                    "Illustrator"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "UI/UX Design",
+                "level": "Expert"
+            },
+            {
+                "name": "Figma",
+                "level": "Advanced"
+            },
+            {
+                "name": "Adobe XD",
+                "level": "Advanced"
+            },
+            {
+                "name": "Photoshop",
+                "level": "Advanced"
+            },
+            {
+                "name": "Illustrator",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "German",
+                "proficiency": "Conversational"
+            },
+            {
+                "name": "French",
+                "proficiency": "Conversational"
+            }
+        ],
+        "achievements": [
+            "Designed a mobile app that won a design award",
+            "Conducted user testing that improved user satisfaction by 25%",
+            "Created a design system that reduced design time by 30%"
+        ]
+    },
+    {
+        "userId": "6617c1e923b7e4c2f8030117",
+        "experiences": [
+            {
+                "title": "DevOps Engineer",
+                "company": "Cloud Solutions",
+                "location": "Remote",
+                "employmentType": "Contract",
+                "startDate": "2021-05-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Managed cloud infrastructure and automated deployment processes.",
+                "technologiesUsed": [
+                    "AWS",
+                    "Docker",
+                    "Kubernetes"
+                ]
+            },
+            {
+                "title": "Software Engineer",
+                "company": "Tech Innovations",
+                "location": "New York, USA",
+                "employmentType": "Full-time",
+                "startDate": "2020-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Developed and maintained web applications using React and Node.js.",
+                "technologiesUsed": [
+                    "React",
+                    "Node.js",
+                    "MongoDB"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "DevOps",
+                "level": "Expert"
+            },
+            {
+                "name": "AWS",
+                "level": "Advanced"
+            },
+            {
+                "name": "Docker",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "Italian",
+                "proficiency": "Conversational"
+            }
+        ],
+        "achievements": [
+            "Reduced deployment time by 50% through automation",
+            "Implemented a monitoring system that improved uptime by 99%"
+        ]
+    },
+    {
+        "userId": "6617c1e923b7e4c2f8030118",
+        "experiences": [
+            {
+                "title": "Project Manager",
+                "company": "Tech Solutions",
+                "location": "New York, USA",
+                "employmentType": "Full-time",
+                "startDate": "2019-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Managed software development projects and coordinated with cross-functional teams.",
+                "technologiesUsed": [
+                    "JIRA",
+                    "Trello"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "Project Management",
+                "level": "Expert"
+            },
+            {
+                "name": "Agile Methodologies",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "Chinese",
+                "proficiency": "Conversational"
+            },
+            {
+                "name": "Hindi",
+                "proficiency": "Native"
+            }
+        ],
+        "achievements": [
+            "Successfully delivered 10+ projects on time and within budget",
+            "Implemented Agile practices that improved team productivity by 30%"
+        ]
+    },
+    {
+        "userId": "6617c1e923b7e4c2f8030119",
+        "experiences": [
+            {
+                "title": "Data Analyst",
+                "company": "Data Insights",
+                "location": "Remote",
+                "employmentType": "Internship",
+                "startDate": "2022-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Analyzed data sets to extract insights and build reports.",
+                "technologiesUsed": [
+                    "SQL",
+                    "Excel"
+                ]
+            },
+            {
+                "title": "Business Analyst",
+                "company": "Tech Innovations",
+                "location": "New York, USA",
+                "employmentType": "Full-time",
+                "startDate": "2020-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Worked with stakeholders to gather requirements and analyze business processes.",
+                "technologiesUsed": [
+                    "Tableau",
+                    "Power BI"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "Data Analysis",
+                "level": "Expert"
+            },
+            {
+                "name": "SQL",
+                "level": "Advanced"
+            },
+            {
+                "name": "Excel",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "Japanese",
+                "proficiency": "Conversational"
+            }
+        ],
+        "achievements": [
+            "Built a dashboard that improved data visibility for stakeholders",
+            "Conducted analysis that led to a 15% cost reduction in operations"
+        ]
+    },
+    {
+        "userId": "6617c1e923b7e4c2f8030110",
+        "experiences": [
+            {
+                "title": "Software Engineer",
+                "company": "Tech Innovations",
+                "location": "New York, USA",
+                "employmentType": "Full-time",
+                "startDate": "2021-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Developed and maintained web applications using React and Node.js.",
+                "technologiesUsed": [
+                    "React",
+                    "Node.js",
+                    "MongoDB"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "JavaScript",
+                "level": "Expert"
+            },
+            {
+                "name": "React",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "Spanish",
+                "proficiency": "Conversational"
+            }
+        ],
+        "achievements": [
+            "Developed a full-stack application that increased user engagement by 30%",
+            "Led a team of 5 developers to successfully deliver a project ahead of schedule"
+        ]
+    },
+    {
+        "userId": "6617c1e923b7e4c2f8030113",
+        "experiences": [
+            {
+                "title": "Software Engineer",
+                "company": "Tech Innovations",
+                "location": "New York, USA",
+                "employmentType": "Full-time",
+                "startDate": "2021-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Developed and maintained web applications using React and Node.js.",
+                "technologiesUsed": [
+                    "React",
+                    "Node.js",
+                    "MongoDB"
+                ]
+            },
+            {
+                "title": "Data Analyst",
+                "company": "Data Insights",
+                "location": "Remote",
+                "employmentType": "Internship",
+                "startDate": "2022-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Analyzed data sets to extract insights and build reports.",
+                "technologiesUsed": [
+                    "SQL",
+                    "Excel"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "JavaScript",
+                "level": "Expert"
+            },
+            {
+                "name": "React",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "Spanish",
+                "proficiency": "Conversational"
+            }
+        ],
+        "achievements": [
+            "Developed a full-stack application that increased user engagement by 30%",
+            "Led a team of 5 developers to successfully deliver a project ahead of schedule"
+        ]
+    },
+    {
+        "userId": "6617c1e923b7e4c2f8030111",
+        "experiences": [
+            {
+                "title": "Software Engineer",
+                "company": "Tech Innovations",
+                "location": "New York, USA",
+                "employmentType": "Full-time",
+                "startDate": "2021-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Developed and maintained web applications using React and Node.js.",
+                "technologiesUsed": [
+                    "React",
+                    "Node.js",
+                    "MongoDB"
+                ]
+            },
+            {
+                "title": "Data Scientist",
+                "company": "Data Insights",
+                "location": "San Francisco, USA",
+                "employmentType": "Internship",
+                "startDate": "2022-06-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Analyzed data sets to extract insights and build predictive models.",
+                "technologiesUsed": [
+                    "Python",
+                    "Pandas",
+                    "Scikit-learn"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "JavaScript",
+                "level": "Expert"
+            },
+            {
+                "name": "React",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "Spanish",
+                "proficiency": "Conversational"
+            }
+        ],
+        "achievements": [
+            "Developed a full-stack application that increased user engagement by 30%",
+            "Led a team of 5 developers to successfully deliver a project ahead of schedule"
+        ]
+    },
+    {
+        "userId": "6617c1e923b7e4c2f8030112",
+        "experiences": [
+            {
+                "title": "Software Engineer",
+                "company": "Tech Innovations",
+                "location": "New York, USA",
+                "employmentType": "Full-time",
+                "startDate": "2021-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Developed and maintained web applications using React and Node.js.",
+                "technologiesUsed": [
+                    "React",
+                    "Node.js",
+                    "MongoDB"
+                ]
+            },
+            {
+                "title": "Data Analyst",
+                "company": "Data Insights",
+                "location": "Remote",
+                "employmentType": "Internship",
+                "startDate": "2022-01-01",
+                "endDate": null,
+                "currentlyWorking": true,
+                "responsibilities": "Analyzed data sets to extract insights and build reports.",
+                "technologiesUsed": [
+                    "SQL",
+                    "Excel"
+                ]
+            }
+        ],
+        "skills": [
+            {
+                "name": "JavaScript",
+                "level": "Expert"
+            },
+            {
+                "name": "React",
+                "level": "Advanced"
+            }
+        ],
+        "languages": [
+            {
+                "name": "English",
+                "proficiency": "Fluent"
+            },
+            {
+                "name": "Spanish",
+                "proficiency": "Conversational"
+            }
+        ],
+        "achievements": [
+            "Developed a full-stack application that increased user engagement by 30%",
+            "Led a team of 5 developers to successfully deliver a project ahead of schedule"
+        ]
+    }
+]
